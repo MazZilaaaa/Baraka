@@ -82,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				33766052281AD68A000047C6 /* Stocks */,
+				33766084281AD754000047C6 /* Resources */,
 				33766069281AD68D000047C6 /* StocksTests */,
 				33766073281AD68D000047C6 /* StocksUITests */,
 				33766051281AD68A000047C6 /* Products */,
@@ -102,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				33766083281AD73A000047C6 /* App */,
-				33766084281AD754000047C6 /* Resources */,
 				33766057281AD68A000047C6 /* ViewController.swift */,
 			);
 			path = Stocks;
@@ -130,9 +130,9 @@
 			children = (
 				33766087281AD7F1000047C6 /* Debug.xcconfig */,
 				33766088281AD7F1000047C6 /* Release.xcconfig */,
-				33766053281AD68A000047C6 /* AppDelegate.swift */,
 				33766061281AD68D000047C6 /* Info.plist */,
 				33766085281AD7D2000047C6 /* Configuration.swift */,
+				33766053281AD68A000047C6 /* AppDelegate.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
