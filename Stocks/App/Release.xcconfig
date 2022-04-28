@@ -1,0 +1,17 @@
+//
+//  Release.xcconfig
+//  EventsList
+//
+//  Created by Aleksandr Fadeev on 28.04.2022.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+BUNDLE_DISPLAY_NAME = Stocks
+PRODUCT_BUNDLE_IDENTIFIER = com.test.Stocks
+
+// Servers urls
+NEWS_BASE_URL = https:/$()/saurav.tech
+
+STOCKS_BASE_URL = https:/$()/raw.githubusercontent.com
