@@ -7,18 +7,18 @@
 
 import Foundation
 
-enum NewsAPI {
-    case news
+enum ArticlesAPI {
+    case articles
 }
 
-extension NewsAPI: NetworkAPI {
+extension ArticlesAPI: NetworkAPI {
     var baseURL: URL {
         API.newsURL
     }
     
     var path: String {
         switch self {
-        case .news:
+        case .articles:
             return "/NewsAPI/everything/cnn.json"
         }
     }

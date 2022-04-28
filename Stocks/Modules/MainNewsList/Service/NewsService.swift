@@ -7,12 +7,12 @@
 
 import Combine
 
-final class NewsService: NetworkService<NewsAPI> {
+final class NewsService: NetworkService<ArticlesAPI> {
 }
 
 extension NewsService: NewsServiceProtocol {
-    func getNews() -> AnyPublisher<ArticlesModel, Error> {
-        return run(.news)
+    func getArticles() -> AnyPublisher<ArticlesModel, Error> {
+        return run(.articles)
             .map { response in
                 return response.data
             }

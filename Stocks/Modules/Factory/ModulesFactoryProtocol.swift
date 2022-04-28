@@ -6,4 +6,6 @@
 //
 
 protocol ModulesFactoryProtocol {
+    func createHome(output: HomeOutput?) -> HomeModule
+    func createMainNewsList(output: MainNewsListOutput?) -> MainNewsListModule
 }

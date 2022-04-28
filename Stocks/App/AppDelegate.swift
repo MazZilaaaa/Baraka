@@ -14,6 +14,7 @@ final class AppDelegate: UIResponder {
     
     var window: UIWindow?
     
+    var appCoordinator: Coordinator!
     private var modulesFactory: ModulesFactoryProtocol!
     private var dependencies: DependencyFactoryProtocol!
     
@@ -21,7 +22,7 @@ final class AppDelegate: UIResponder {
     
     private func configureApp() {
         configureDependencies()
-        configureWindow()
+        configureAppCoordinator()
     }
     
     private func configureDependencies() {
@@ -29,12 +30,18 @@ final class AppDelegate: UIResponder {
         modulesFactory = ModulesFactory(dependencies: dependencies)
     }
     
-    private func configureWindow() {
-        let screenWindow = UIWindow(frame: UIScreen.main.bounds)
-        screenWindow.rootViewController = UINavigationController()
-        window = screenWindow
+    private func configureAppCoordinator() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let navigationController = UINavigationController()
+        window?.rootViewController = navigationController
         
-        screenWindow.makeKeyAndVisible()
+        appCoordinator = AppCoordinator(
+            navigationController: navigationController,
+            modulesFactory: modulesFactory
+        )
+        appCoordinator.start()
+        
+        window?.makeKeyAndVisible()
     }
 }
 
