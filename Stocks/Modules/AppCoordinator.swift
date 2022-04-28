@@ -16,8 +16,9 @@ final class AppCoordinator {
     let navigationController: UINavigationController
     let modulesFactory: ModulesFactoryProtocol
     
-    init(navigationController: UINavigationController,
-         modulesFactory: ModulesFactoryProtocol
+    init(
+        navigationController: UINavigationController,
+        modulesFactory: ModulesFactoryProtocol
     ) {
         self.navigationController = navigationController
         self.modulesFactory = modulesFactory
