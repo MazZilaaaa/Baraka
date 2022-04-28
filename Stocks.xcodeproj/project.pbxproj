@@ -17,6 +17,10 @@
 		33766086281AD7D2000047C6 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33766085281AD7D2000047C6 /* Configuration.swift */; };
 		33766089281AD7F1000047C6 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 33766087281AD7F1000047C6 /* Debug.xcconfig */; };
 		3376608A281AD7F1000047C6 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 33766088281AD7F1000047C6 /* Release.xcconfig */; };
+		3376608D281ADC6D000047C6 /* DependencyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3376608C281ADC6D000047C6 /* DependencyFactory.swift */; };
+		3376608F281ADC75000047C6 /* DependencyFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3376608E281ADC75000047C6 /* DependencyFactoryProtocol.swift */; };
+		33766093281ADCF0000047C6 /* ModulesFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33766092281ADCF0000047C6 /* ModulesFactoryProtocol.swift */; };
+		33766095281ADD09000047C6 /* ModulesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33766094281ADD09000047C6 /* ModulesFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,10 @@
 		33766085281AD7D2000047C6 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		33766087281AD7F1000047C6 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		33766088281AD7F1000047C6 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		3376608C281ADC6D000047C6 /* DependencyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyFactory.swift; sourceTree = "<group>"; };
+		3376608E281ADC75000047C6 /* DependencyFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyFactoryProtocol.swift; sourceTree = "<group>"; };
+		33766092281ADCF0000047C6 /* ModulesFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulesFactoryProtocol.swift; sourceTree = "<group>"; };
+		33766094281ADD09000047C6 /* ModulesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulesFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +110,8 @@
 		33766052281AD68A000047C6 /* Stocks */ = {
 			isa = PBXGroup;
 			children = (
+				33766090281ADCD2000047C6 /* Modules */,
+				3376608B281ADC65000047C6 /* Dependency */,
 				33766083281AD73A000047C6 /* App */,
 				33766057281AD68A000047C6 /* ViewController.swift */,
 			);
@@ -144,6 +154,32 @@
 				3376605E281AD68D000047C6 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		3376608B281ADC65000047C6 /* Dependency */ = {
+			isa = PBXGroup;
+			children = (
+				3376608C281ADC6D000047C6 /* DependencyFactory.swift */,
+				3376608E281ADC75000047C6 /* DependencyFactoryProtocol.swift */,
+			);
+			path = Dependency;
+			sourceTree = "<group>";
+		};
+		33766090281ADCD2000047C6 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				33766091281ADCE8000047C6 /* Factory */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		33766091281ADCE8000047C6 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				33766092281ADCF0000047C6 /* ModulesFactoryProtocol.swift */,
+				33766094281ADD09000047C6 /* ModulesFactory.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,9 +314,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33766095281ADD09000047C6 /* ModulesFactory.swift in Sources */,
 				33766086281AD7D2000047C6 /* Configuration.swift in Sources */,
+				3376608D281ADC6D000047C6 /* DependencyFactory.swift in Sources */,
+				33766093281ADCF0000047C6 /* ModulesFactoryProtocol.swift in Sources */,
 				33766058281AD68A000047C6 /* ViewController.swift in Sources */,
 				33766054281AD68A000047C6 /* AppDelegate.swift in Sources */,
+				3376608F281ADC75000047C6 /* DependencyFactoryProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

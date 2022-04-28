@@ -11,6 +11,7 @@ import UIKit
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private var modulesFactory: ModulesFactoryProtocol!
 
     func application(
         _ application: UIApplication,
@@ -22,7 +23,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func configureApp() {
-        // Override point for customisation after application launch.
+        modulesFactory = ModulesFactory(dependencies: DependencyFactory())
+        
         let screenWindow = UIWindow(frame: UIScreen.main.bounds)
         let navigationController = UINavigationController()
         screenWindow.rootViewController = navigationController
