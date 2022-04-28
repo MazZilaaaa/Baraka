@@ -1,0 +1,37 @@
+//
+//  HttpClient.swift
+//  Stocks
+//
+//  Created by Aleksandr Fadeev on 28.04.2022.
+//
+
+import Combine
+import Foundation
+
+class NetworkService {
+    private let jsonDecoder: JSONDecoder
+    private let urlRequestBuilder: URLRequestBuilderProtocol
+    
+    public init(
+        jsonDecoder: JSONDecoder,
+        urlRequestBuilder: URLRequestBuilderProtocol
+    ) {
+        self.jsonDecoder = jsonDecoder
+        self.urlRequestBuilder = urlRequestBuilder
+    }
+    
+    func run<T: Decodable>(_ api: NetworkAPI) -> AnyPublisher<Response<T>, Error> {
+        guard let request = urlRequestBuilder.buildRequest(api) else {
+            return Fail(error: HttpClientError.badUrl).eraseToAnyPublisher()
+        }
+        
+        return URLSession.shared
+            .dataTaskPublisher(for: request)
+            .tryMap { [jsonDecoder] result -> Response<T> in
+                let data = try jsonDecoder.decode(T.self, from: result.data)
+                return Response(data: data, response: result.response)
+            }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+}
