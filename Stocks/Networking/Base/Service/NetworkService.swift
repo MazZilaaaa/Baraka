@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-class NetworkService {
+class NetworkService<API: NetworkAPI> {
     private let jsonDecoder: JSONDecoder
     private let urlRequestBuilder: URLRequestBuilderProtocol
     
@@ -20,9 +20,9 @@ class NetworkService {
         self.urlRequestBuilder = urlRequestBuilder
     }
     
-    func run<T: Decodable>(_ api: NetworkAPI) -> AnyPublisher<Response<T>, Error> {
+    func run<T: Decodable>(_ api: API) -> AnyPublisher<Response<T>, Error> {
         guard let request = urlRequestBuilder.buildRequest(api) else {
-            return Fail(error: HttpClientError.badUrl).eraseToAnyPublisher()
+            return Fail(error: NetworkServiceError.badUrl).eraseToAnyPublisher()
         }
         
         return URLSession.shared
@@ -31,6 +31,10 @@ class NetworkService {
                 let data = try jsonDecoder.decode(T.self, from: result.data)
                 return Response(data: data, response: result.response)
             }
+            .mapError({ error in
+                print(error)
+                return error
+            })
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }

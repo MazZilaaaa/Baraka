@@ -19,7 +19,7 @@ extension NewsAPI: NetworkAPI {
     var path: String {
         switch self {
         case .news:
-            return "NewsAPI/everything/cnn.json"
+            return "/NewsAPI/everything/cnn.json"
         }
     }
     

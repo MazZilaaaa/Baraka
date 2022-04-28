@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HttpClientError: Error {
+enum NetworkServiceError: Error {
     case badUrl
     case unexpectedData
     case unknownError

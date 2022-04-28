@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Response<T> {
+struct Response<T: Codable> {
     let data: T
     let response: URLResponse
 }
