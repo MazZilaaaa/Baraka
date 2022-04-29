@@ -295,8 +295,7 @@
 			children = (
 				336141B4281CAB2D0016247E /* List */,
 				336141AF281CAAFF0016247E /* Cache */,
-				336141A2281C58B30016247E /* ImageLoader.swift */,
-				336141A4281C59190016247E /* UIImageLoader.swift */,
+				336141B9281CB2450016247E /* ImageLoader */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -323,6 +322,15 @@
 				336141B7281CAB540016247E /* LinkedList.swift */,
 			);
 			path = List;
+			sourceTree = "<group>";
+		};
+		336141B9281CB2450016247E /* ImageLoader */ = {
+			isa = PBXGroup;
+			children = (
+				336141A2281C58B30016247E /* ImageLoader.swift */,
+				336141A4281C59190016247E /* UIImageLoader.swift */,
+			);
+			path = ImageLoader;
 			sourceTree = "<group>";
 		};
 		33766047281AD68A000047C6 = {
