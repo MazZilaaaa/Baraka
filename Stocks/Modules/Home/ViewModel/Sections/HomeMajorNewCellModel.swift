@@ -9,6 +9,14 @@ import Foundation
 
 final class HomeMajorNewCellModel {
     
+    public var title: String? {
+        return newModel.title
+    }
+    
+    public var image: URL? {
+        return newModel.urlToImage
+    }
+    
     private(set) var newModel: NewModel
     
     init(newModel: NewModel) {

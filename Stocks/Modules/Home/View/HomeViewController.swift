@@ -23,6 +23,7 @@ final class HomeViewController: UIViewController {
             collectionViewLayout: collectionViewlayout
         )
         
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(HomeMajorNewCell.self, forCellWithReuseIdentifier: HomeMajorNewCell.identifier)
         collectionView.register(HomeNewsCell.self, forCellWithReuseIdentifier: HomeNewsCell.identifier)
@@ -61,7 +62,6 @@ final class HomeViewController: UIViewController {
     }
     
     private func setupLayout() {
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         let leftConstraint = collectionView.leftAnchor.constraint(equalTo: view.leftAnchor)
         let topConstraint = collectionView.topAnchor.constraint(equalTo: view.topAnchor)
         let rightConstraint = collectionView.rightAnchor.constraint(equalTo: view.rightAnchor)

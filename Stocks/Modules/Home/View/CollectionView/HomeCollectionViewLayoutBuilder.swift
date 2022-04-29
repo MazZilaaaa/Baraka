@@ -15,10 +15,16 @@ final class HomeCollectionViewLayoutBuilder {
         )
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: Paddings.xxs,
+            leading: Paddings.xxs,
+            bottom: Paddings.s,
+            trailing: Paddings.xxs
+        )
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(44)
+            heightDimension: .fractionalWidth(1.0)
         )
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
