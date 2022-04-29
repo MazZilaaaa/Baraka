@@ -41,7 +41,7 @@ extension MainNewsListViewModel {
     func loadNews() {
         loadingState = .loading
         newsService
-            .getArticles()
+            .getNews()
             .map { articleResponse in
                 return articleResponse.articles.map { articleModel in
                     MainNewsCellModel(articleModel: articleModel)

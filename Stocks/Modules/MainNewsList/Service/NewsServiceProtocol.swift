@@ -8,5 +8,5 @@
 import Combine
 
 protocol NewsServiceProtocol {
-    func getArticles() -> AnyPublisher<ArticlesModel, Error>
+    func getNews() -> AnyPublisher<NewsModel, Error>
 }

@@ -15,18 +15,10 @@ final class HomeConfigurator {
         dependencies: DependencyFactoryProtocol,
         output: HomeOutput? = nil
     ) -> HomeModule {
-        let mainNewsListModule = MainNewsListConfigurator().configure(
-            dependencies: dependencies,
-            output: nil
-        )
-        
-        let vm = HomeViewModel(mainNewsViewModel: mainNewsListModule.viewModel)
+        let vm = HomeViewModel(newsService: dependencies.newsService)
         let vc = HomeViewController(viewModel: vm)
         
-        mainNewsListModule.viewModel.output = vm
         vm.output = output
-        
-        vc.mainNewsViewController = mainNewsListModule.viewController
         
         return (vm, vc)
     }

@@ -11,7 +11,7 @@ final class NewsService: NetworkService<ArticlesAPI> {
 }
 
 extension NewsService: NewsServiceProtocol {
-    func getArticles() -> AnyPublisher<ArticlesModel, Error> {
+    func getNews() -> AnyPublisher<NewsModel, Error> {
         return run(.articles)
             .map { response in
                 return response.data

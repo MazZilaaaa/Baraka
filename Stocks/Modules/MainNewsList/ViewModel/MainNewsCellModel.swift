@@ -8,9 +8,9 @@
 import Foundation
 
 final class MainNewsCellModel {
-    let articleModel: ArticleModel
+    let articleModel: NewModel
     
-    init(articleModel: ArticleModel) {
+    init(articleModel: NewModel) {
         self.articleModel = articleModel
     }
 }

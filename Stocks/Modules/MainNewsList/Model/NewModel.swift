@@ -1,5 +1,5 @@
 //
-//  News.swift
+//  NewModel.swift
 //  Stocks
 //
 //  Created by Aleksandr Fadeev on 28.04.2022.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct ArticleModel: Codable {
-    let source: ArticleSourceModel
+struct NewModel: Codable, Hashable {
+    let source: NewSourceModel
     let author: String?
     let title: String?
     let urlToImage: URL?

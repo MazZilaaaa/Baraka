@@ -5,6 +5,7 @@
 //  Created by Aleksandr Fadeev on 28.04.2022.
 //
 
+import Combine
 import UIKit
 
 final class HomeViewController: UIViewController {
@@ -15,7 +16,41 @@ final class HomeViewController: UIViewController {
     
     // MARK: - UIControls
     
-    var mainNewsViewController: UIViewController?
+    lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.register(HomeMajorNewCell.self, forCellWithReuseIdentifier: HomeMajorNewCell.identifier)
+        collectionView.register(HomeNewsCell.self, forCellWithReuseIdentifier: HomeNewsCell.identifier)
+        
+        return collectionView
+    }()
+    
+    lazy var dataSource: HomeDataSource = {
+        return HomeDataSource(collectionView: collectionView)
+    }()
+    
+    private var subscriptions: Set<AnyCancellable> = []
+    
+    private func createCollectionViewLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(44)
+        )
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -30,11 +65,27 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .gray
+        setupUI()
+        setupLayout()
+        bindViewModel()
         
-        if let mainNewsView = mainNewsViewController?.view {
-            mainNewsView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 150)
-            view.addSubview(mainNewsView)
-        }
+        viewModel.loadData()
+    }
+    
+    private func setupUI() {
+        view.addSubview(collectionView)
+    }
+    
+    private func setupLayout() {
+    }
+    
+    private func bindViewModel() {
+        viewModel
+            .$sections
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] sections in
+                self?.dataSource.sections = sections
+            })
+            .store(in: &subscriptions)
     }
 }
