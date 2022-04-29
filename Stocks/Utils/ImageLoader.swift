@@ -8,7 +8,9 @@
 import Foundation
 import UIKit
 
-class ImageLoader {
+final class ImageLoader {
+    
+    // this is just for test project, in real project we neet to use RLU, or existing libs like Kingfisher
     private var loadedImages = [URL: UIImage]()
     private var runningRequests = [UUID: URLSessionDataTask]()
     

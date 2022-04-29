@@ -28,7 +28,7 @@ final class HomeCollectonViewDataSource {
     
     private func reloadSections(_ sections: [HomeSectionModel]) {
         let snapshot = createSnapshot(sections: sections)
-        dataSource.apply(snapshot, animatingDifferences: true)
+         dataSource.apply(snapshot, animatingDifferences: true)
     }
     
     private func createCell(collectionView: UICollectionView, indexPath: IndexPath, itemIdentifier: AnyHashable) -> UICollectionViewCell? {
