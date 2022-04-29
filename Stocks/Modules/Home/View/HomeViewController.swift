@@ -17,10 +17,9 @@ final class HomeViewController: UIViewController {
     // MARK: - UIControls
     
     lazy var collectionView: UICollectionView = {
-        let collectionViewlayout = HomeCollectionViewLayoutBuilder().collectionViewLayout
         let collectionView = UICollectionView(
             frame: .zero,
-            collectionViewLayout: collectionViewlayout
+            collectionViewLayout: collectionViewLayout.layout
         )
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,8 +30,12 @@ final class HomeViewController: UIViewController {
         return collectionView
     }()
     
-    lazy var dataSource: HomeCollectonViewDataSource = {
+    lazy var collectionViewDataSource: HomeCollectonViewDataSource = {
         return HomeCollectonViewDataSource(collectionView: collectionView)
+    }()
+    
+    lazy var collectionViewLayout: HomeCollectionViewLayout = {
+        return HomeCollectionViewLayout()
     }()
     
     private var subscriptions: Set<AnyCancellable> = []
@@ -74,7 +77,12 @@ final class HomeViewController: UIViewController {
             .$sections
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] sections in
-                self?.dataSource.sections = sections
+                guard let self = self else {
+                    return
+                }
+                
+                self.collectionViewLayout.sections = sections
+                self.collectionViewDataSource.sections = sections
             })
             .store(in: &subscriptions)
     }
