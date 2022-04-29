@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class HomeDataSource {
+final class HomeCollectonViewDataSource {
     var sections: [HomeSectionModel] {
         didSet {
             reloadSections(sections)

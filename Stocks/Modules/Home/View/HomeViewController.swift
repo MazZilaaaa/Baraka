@@ -17,7 +17,12 @@ final class HomeViewController: UIViewController {
     // MARK: - UIControls
     
     lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCollectionViewLayout())
+        let collectionViewlayout = HomeCollectionViewLayoutBuilder().collectionViewLayout
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: collectionViewlayout
+        )
+        
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(HomeMajorNewCell.self, forCellWithReuseIdentifier: HomeMajorNewCell.identifier)
         collectionView.register(HomeNewsCell.self, forCellWithReuseIdentifier: HomeNewsCell.identifier)
@@ -25,32 +30,11 @@ final class HomeViewController: UIViewController {
         return collectionView
     }()
     
-    lazy var dataSource: HomeDataSource = {
-        return HomeDataSource(collectionView: collectionView)
+    lazy var dataSource: HomeCollectonViewDataSource = {
+        return HomeCollectonViewDataSource(collectionView: collectionView)
     }()
     
     private var subscriptions: Set<AnyCancellable> = []
-    
-    private func createCollectionViewLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
-        )
-        
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(44)
-        )
-        
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
-        let section = NSCollectionLayoutSection(group: group)
-        
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
-    }
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
