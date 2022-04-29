@@ -9,13 +9,11 @@ import Foundation
 import UIKit
 
 final class ImageLoader {
-    
-    // this is just for test project, in real project we neet to use RLU, or existing libs like Kingfisher
-    private var loadedImages = [URL: UIImage]()
+    private var loadedImages: LRUCache = LRUCache<URL>(10)
     private var runningRequests = [UUID: URLSessionDataTask]()
     
     func loadImage(_ url: URL, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> UUID? {
-        if let image = loadedImages[url] {
+        if let image = loadedImages.get(url) as? UIImage{
             completion(.success(image))
             return nil
         }
@@ -28,7 +26,7 @@ final class ImageLoader {
             }
             
             if let data = data, let image = UIImage(data: data) {
-                self.loadedImages[url] = image
+                self.loadedImages.set(url, val: image)
                 completion(.success(image))
                 return
             }
