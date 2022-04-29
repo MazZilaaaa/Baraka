@@ -77,6 +77,12 @@ final class HomeViewController: UIViewController {
     }
     
     private func setupLayout() {
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        let leftConstraint = collectionView.leftAnchor.constraint(equalTo: view.leftAnchor)
+        let topConstraint = collectionView.topAnchor.constraint(equalTo: view.topAnchor)
+        let rightConstraint = collectionView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        let bottomConstraint = collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        view.addConstraints([leftConstraint, topConstraint, rightConstraint, bottomConstraint])
     }
     
     private func bindViewModel() {
