@@ -22,8 +22,9 @@ final class HomeMajorNewCell: UICollectionViewCell {
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.systemFont(ofSize: 18)
-        titleLabel.numberOfLines = 0
+        titleLabel.font = UIFont.systemFont(ofSize: 16)
+        titleLabel.numberOfLines = 2
+        titleLabel.textColor = .black
         
         return titleLabel
     }()
@@ -31,7 +32,9 @@ final class HomeMajorNewCell: UICollectionViewCell {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleToFill
+        imageView.layer.cornerRadius = 4
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
         
         return imageView
     }()
@@ -63,9 +66,9 @@ final class HomeMajorNewCell: UICollectionViewCell {
             imageView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: Paddings.xxs),
-            titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: Paddings.xxs),
             titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Paddings.xxs)
         ])
     }
     

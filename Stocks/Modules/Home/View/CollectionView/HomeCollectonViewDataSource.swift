@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class HomeCollectonViewDataSource {
-    var sections: [HomeSectionModel] {
+    var sections: [HomeSectionModel] = [] {
         didSet {
             reloadSections(sections)
         }
@@ -18,7 +18,6 @@ final class HomeCollectonViewDataSource {
     private var dataSource: UICollectionViewDiffableDataSource<HomeSectionModel, AnyHashable>!
     
     init(collectionView: UICollectionView) {
-        self.sections = []
         self.dataSource = UICollectionViewDiffableDataSource<HomeSectionModel, AnyHashable>(
             collectionView: collectionView,
             cellProvider: createCell
