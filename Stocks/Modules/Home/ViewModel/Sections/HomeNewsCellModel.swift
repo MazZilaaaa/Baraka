@@ -13,15 +13,15 @@ final class HomeNewsCellModel {
         return newModel.title
     }
     
-    public var description: String {
+    var description: String {
         return newModel.description
     }
     
-    public var date: String {
+    var date: String {
         return DateFormatter.fullDateFormatter.string(from: newModel.publishedAt)
     }
     
-    public var author: String? {
+    var author: String? {
         return newModel.author
     }
     

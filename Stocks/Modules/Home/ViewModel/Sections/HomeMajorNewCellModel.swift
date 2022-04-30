@@ -9,11 +9,11 @@ import Foundation
 
 final class HomeMajorNewCellModel {
     
-    public var title: String? {
+    var title: String? {
         return newModel.title
     }
     
-    public var image: URL? {
+    var image: URL? {
         return newModel.urlToImage
     }
     

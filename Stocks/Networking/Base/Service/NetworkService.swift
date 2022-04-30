@@ -12,7 +12,7 @@ class NetworkService<API: NetworkAPI> {
     private let jsonDecoder: JSONDecoder
     private let urlRequestBuilder: URLRequestBuilderProtocol
     
-    public init(
+    init(
         jsonDecoder: JSONDecoder,
         urlRequestBuilder: URLRequestBuilderProtocol
     ) {

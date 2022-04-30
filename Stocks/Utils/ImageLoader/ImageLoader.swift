@@ -13,7 +13,7 @@ final class ImageLoader {
     private var runningRequests = [UUID: URLSessionDataTask]()
     
     func loadImage(_ url: URL, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> UUID? {
-        if let image = loadedImages.get(url) as? UIImage{
+        if let image = loadedImages.get(url) as? UIImage {
             completion(.success(image))
             return nil
         }
@@ -47,7 +47,7 @@ final class ImageLoader {
     }
     
     func cancelLoad(_ uuid: UUID) {
-      runningRequests[uuid]?.cancel()
-      runningRequests.removeValue(forKey: uuid)
+        runningRequests[uuid]?.cancel()
+        runningRequests.removeValue(forKey: uuid)
     }
 }
