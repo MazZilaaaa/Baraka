@@ -22,7 +22,7 @@ final class HomeViewModel: ObservableObject {
     
     // MARK: - Environment
     
-    @Published var sections: OrderedSet<HomeSectionModel> = []
+    @Published var sections: HomeSectionsModel = HomeSectionsModel()
     
     private var subscriptions: Set<AnyCancellable> = []
     private var monitoringStocksToken: AnyCancellable?
@@ -56,7 +56,7 @@ final class HomeViewModel: ObservableObject {
             return HomeStockCellModel(stockPriceModel: stockPrice)
         }
         
-        sections.append(.stocks(items: stocksItems))
+        sections.stocksSection = HomeStockSectionModel(items: stocksItems)
     }
     
     func updateNews(_ newsModels: NewsModel) {
@@ -68,8 +68,8 @@ final class HomeViewModel: ObservableObject {
             HomeNewsCellModel(newModel: $0)
         }
         
-        sections.append(.majorNews(items: majorNewsItems))
-        sections.append(.news(items: newsItems))
+        sections.majorNewsSection = HomeMajorNewsSectionModel(items: majorNewsItems)
+        sections.newsSection = HomeNewsSectionModel(items: newsItems)
     }
     
     func loadData() {

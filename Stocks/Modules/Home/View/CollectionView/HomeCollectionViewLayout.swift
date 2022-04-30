@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class HomeCollectionViewLayout {
-    var sections: [HomeSectionModel] = []
+    var sectionsModel: HomeSectionsModel = HomeSectionsModel()
     
     var layout: UICollectionViewCompositionalLayout!
     
@@ -18,14 +18,14 @@ final class HomeCollectionViewLayout {
     }
     
     private func createLayout(sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
-        let sectionLayoutKind = sections[sectionIndex]
-        switch (sectionLayoutKind) {
+        let section = sectionsModel.allSections[sectionIndex]
+        switch section.type {
         case .stocks:
             return self.generateMajorNewsLayout()
         case .majorNews:
             return self.generateMajorNewsLayout()
-        case let .news(items):
-            return self.generateNewsLayout(itemsCount: items.count)
+        case .news:
+            return self.generateNewsLayout(itemsCount: section.items.count)
         }
     }
     

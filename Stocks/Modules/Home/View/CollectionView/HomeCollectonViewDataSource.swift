@@ -9,16 +9,16 @@ import Foundation
 import UIKit
 
 final class HomeCollectonViewDataSource {
-    var sections: [HomeSectionModel] = [] {
+    var sectionsModel: HomeSectionsModel = HomeSectionsModel() {
         didSet {
-            reloadSections(sections)
+            reloadSections(sectionsModel)
         }
     }
     
-    private var dataSource: UICollectionViewDiffableDataSource<HomeSectionModel, AnyHashable>!
+    private var dataSource: UICollectionViewDiffableDataSource<HomeSectionModelType, AnyHashable>!
     
     init(collectionView: UICollectionView) {
-        self.dataSource = UICollectionViewDiffableDataSource<HomeSectionModel, AnyHashable>(
+        self.dataSource = UICollectionViewDiffableDataSource<HomeSectionModelType, AnyHashable>(
             collectionView: collectionView,
             cellProvider: createCell
         )
@@ -26,14 +26,18 @@ final class HomeCollectonViewDataSource {
         self.dataSource.supplementaryViewProvider = createSupplementaryView
     }
     
-    private func reloadSections(_ sections: [HomeSectionModel]) {
-        let snapshot = createSnapshot(sections: sections)
-         dataSource.apply(snapshot, animatingDifferences: true)
+    private func reloadSections(_ sectionsModel: HomeSectionsModel?) {
+        guard let sectionsModel = sectionsModel else {
+            return
+        }
+        
+        let snapshot = createSnapshot(sectionsModel: sectionsModel)
+         dataSource.applySnapshotUsingReloadData(snapshot)
     }
     
     private func createCell(collectionView: UICollectionView, indexPath: IndexPath, itemIdentifier: AnyHashable) -> UICollectionViewCell? {
         var cell: UICollectionViewCell?
-        switch sections[indexPath.section] {
+        switch sectionsModel.allSections[indexPath.section].type {
         case .stocks:
             let stockCell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: HomeStockCell.identifier,
@@ -69,19 +73,12 @@ final class HomeCollectonViewDataSource {
         return nil
     }
     
-    private func createSnapshot(sections: [HomeSectionModel]) -> NSDiffableDataSourceSnapshot<HomeSectionModel, AnyHashable> {
-        var snapshot = NSDiffableDataSourceSnapshot<HomeSectionModel, AnyHashable>()
+    private func createSnapshot(sectionsModel: HomeSectionsModel) -> NSDiffableDataSourceSnapshot<HomeSectionModelType, AnyHashable> {
+        var snapshot = NSDiffableDataSourceSnapshot<HomeSectionModelType, AnyHashable>()
         
-        sections.forEach { section in
-            snapshot.appendSections([section])
-            switch section {
-            case let .stocks(items):
-                snapshot.appendItems(items)
-            case let .majorNews(items):
-                snapshot.appendItems(items)
-            case let .news(items):
-                snapshot.appendItems(items)
-            }
+        sectionsModel.allSections.forEach { section in
+            snapshot.appendSections([section.type])
+            snapshot.appendItems(section.items)
         }
         
         return snapshot

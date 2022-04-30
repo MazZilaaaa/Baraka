@@ -96,9 +96,8 @@ final class HomeViewController: UIViewController {
                 
                 self.refreshControl.endRefreshing()
                 
-                let arraySections = Array(sections)
-                self.collectionViewLayout.sections = arraySections
-                self.collectionViewDataSource.sections = arraySections
+                self.collectionViewLayout.sectionsModel = sections
+                self.collectionViewDataSource.sectionsModel = sections
             })
             .store(in: &subscriptions)
     }
