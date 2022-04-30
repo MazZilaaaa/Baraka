@@ -16,5 +16,11 @@ final class DependencyFactory: DependencyFactoryProtocol {
         )
     }
     
+    var stocksService: StocksServiceProtocol {
+        return StocksService(
+            jsonDecoder: .decoder,
+            urlRequestBuilder: URLRequestBuilder.builder)
+    }
+    
     // MARK: - Storages
 }

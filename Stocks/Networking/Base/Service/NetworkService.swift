@@ -20,16 +20,28 @@ class NetworkService<API: NetworkAPI> {
         self.urlRequestBuilder = urlRequestBuilder
     }
     
-    func run<T: Decodable>(_ api: API) -> AnyPublisher<Response<T>, Error> {
+    func fetch<T: Decodable>(_ api: API) -> AnyPublisher<Response<T>, Error> {
+        return fetchData(api)
+            .tryMap { [weak jsonDecoder] result -> Response<T> in
+                guard let jsonDecoder = jsonDecoder else {
+                    throw NetworkServiceError.masterReleased
+                }
+                
+                let data = try jsonDecoder.decode(T.self, from: result.data)
+                return Response(data: data, response: result.response)
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchData(_ api: API) -> AnyPublisher<Response<Data>, Error> {
         guard let request = urlRequestBuilder.buildRequest(api) else {
             return Fail(error: NetworkServiceError.badUrl).eraseToAnyPublisher()
         }
         
         return URLSession.shared
             .dataTaskPublisher(for: request)
-            .tryMap { [jsonDecoder] result -> Response<T> in
-                let data = try jsonDecoder.decode(T.self, from: result.data)
-                return Response(data: data, response: result.response)
+            .tryMap { result -> Response<Data> in
+                return Response(data: result.data, response: result.response)
             }
             .mapError({ error in
                 print(error)

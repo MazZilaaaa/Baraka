@@ -34,6 +34,15 @@ final class HomeCollectonViewDataSource {
     private func createCell(collectionView: UICollectionView, indexPath: IndexPath, itemIdentifier: AnyHashable) -> UICollectionViewCell? {
         var cell: UICollectionViewCell?
         switch sections[indexPath.section] {
+        case .stocks:
+            let stockCell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: HomeStockCell.identifier,
+                for: indexPath
+            ) as? HomeStockCell
+            
+            stockCell?.viewModel = itemIdentifier as? HomeStockCellModel
+            cell = stockCell
+            
         case .majorNews:
             let majorNewsCell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: HomeMajorNewCell.identifier,
@@ -66,6 +75,8 @@ final class HomeCollectonViewDataSource {
         sections.forEach { section in
             snapshot.appendSections([section])
             switch section {
+            case let .stocks(items):
+                snapshot.appendItems(items)
             case let .majorNews(items):
                 snapshot.appendItems(items)
             case let .news(items):

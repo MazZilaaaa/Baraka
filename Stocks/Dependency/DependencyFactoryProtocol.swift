@@ -10,6 +10,8 @@ protocol DependencyFactoryProtocol {
     // MARK: - Services
     
     var newsService: NewsServiceProtocol { get }
+    
+    var stocksService: StocksServiceProtocol { get }
 
     // MARK: - Storages
 }

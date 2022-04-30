@@ -16,14 +16,23 @@ final class HomeViewController: UIViewController {
     
     // MARK: - UIControls
     
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefreshControllChanged), for: .valueChanged)
+        
+        return refreshControl
+    }()
+    
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(
             frame: .zero,
             collectionViewLayout: collectionViewLayout.layout
         )
         
+        collectionView.refreshControl = refreshControl
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsVerticalScrollIndicator = false
+        collectionView.register(HomeStockCell.self, forCellWithReuseIdentifier: HomeStockCell.identifier)
         collectionView.register(HomeMajorNewCell.self, forCellWithReuseIdentifier: HomeMajorNewCell.identifier)
         collectionView.register(HomeNewsCell.self, forCellWithReuseIdentifier: HomeNewsCell.identifier)
         
@@ -48,6 +57,10 @@ final class HomeViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func handleRefreshControllChanged() {
+        viewModel.loadData()
     }
     
     override func viewDidLoad() {
@@ -81,6 +94,7 @@ final class HomeViewController: UIViewController {
                     return
                 }
                 
+                self.refreshControl.endRefreshing()
                 self.collectionViewLayout.sections = sections
                 self.collectionViewDataSource.sections = sections
             })

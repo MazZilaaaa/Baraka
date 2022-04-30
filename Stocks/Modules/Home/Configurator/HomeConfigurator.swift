@@ -15,7 +15,11 @@ final class HomeConfigurator {
         dependencies: DependencyFactoryProtocol,
         output: HomeOutput? = nil
     ) -> HomeModule {
-        let vm = HomeViewModel(newsService: dependencies.newsService)
+        let vm = HomeViewModel(
+            newsService: dependencies.newsService,
+            stocksService: dependencies.stocksService
+        )
+        
         let vc = HomeViewController(viewModel: vm)
         
         vm.output = output

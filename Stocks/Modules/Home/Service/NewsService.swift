@@ -12,7 +12,7 @@ final class NewsService: NetworkService<ArticlesAPI> {
 
 extension NewsService: NewsServiceProtocol {
     func getNews() -> AnyPublisher<NewsModel, Error> {
-        return run(.articles)
+        return fetch(.articles)
             .map { response in
                 return response.data
             }

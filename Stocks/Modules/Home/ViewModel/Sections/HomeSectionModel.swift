@@ -8,6 +8,7 @@
 import Foundation
 
 enum HomeSectionModel: Hashable {
+    case stocks(items: [HomeStockCellModel])
     case majorNews(items: [HomeMajorNewCellModel])
     case news(items: [HomeNewsCellModel])
 }

@@ -20,6 +20,8 @@ final class HomeCollectionViewLayout {
     private func createLayout(sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
         let sectionLayoutKind = sections[sectionIndex]
         switch (sectionLayoutKind) {
+        case .stocks:
+            return self.generateMajorNewsLayout()
         case .majorNews:
             return self.generateMajorNewsLayout()
         case let .news(items):
