@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import OrderedCollections
 
 final class HomeViewModel: ObservableObject {
     
@@ -21,9 +22,10 @@ final class HomeViewModel: ObservableObject {
     
     // MARK: - Environment
     
-    @Published var sections: [HomeSectionModel] = []
+    @Published var sections: OrderedSet<HomeSectionModel> = []
     
     private var subscriptions: Set<AnyCancellable> = []
+    private var monitoringStocksToken: AnyCancellable?
     
     init(
         newsService: NewsServiceProtocol,
@@ -33,25 +35,31 @@ final class HomeViewModel: ObservableObject {
         self.stocksService = stocksService
     }
     
-    func loadData() {
-        Publishers.Zip(newsService.getNews(), stocksService.getStocks())
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-            } receiveValue: { [weak self] news, stocks in
-                self?.buildSections(newsModels: news, stocksModels: stocks)
-            }
-            .store(in: &subscriptions)
+    func startMonitoringStocks() {
+        monitoringStocksToken = Timer.publish(every: 1, tolerance: 0.5, on: .main, in: .default)
+                .autoconnect()
+                .sink(receiveValue: { [weak self] _ in
+                    self?.loadStocks()
+                })
     }
     
-    private func buildSections(newsModels: NewsModel, stocksModels: StocksModel) {
+    func stopMonitoringStocks() {
+        monitoringStocksToken?.cancel()
+    }
+    
+    func updateStocks(_ stocksModels: StocksModel) {
         let stocksItems: [HomeStockCellModel] = stocksModels.stocks.values.compactMap { prices in
-            guard let stockPrice = prices.first else {
+            guard let stockPrice = prices.randomElement() else {
                 return nil
             }
             
             return HomeStockCellModel(stockPriceModel: stockPrice)
         }
         
+        sections.append(.stocks(items: stocksItems))
+    }
+    
+    func updateNews(_ newsModels: NewsModel) {
         let majorNewsItems = newsModels.articles.prefix(6).map {
             HomeMajorNewCellModel(newModel: $0)
         }
@@ -60,10 +68,29 @@ final class HomeViewModel: ObservableObject {
             HomeNewsCellModel(newModel: $0)
         }
         
-        sections = [
-            .stocks(items: stocksItems),
-            .majorNews(items: majorNewsItems),
-            .news(items: newsItems)
-        ]
+        sections.append(.majorNews(items: majorNewsItems))
+        sections.append(.news(items: newsItems))
+    }
+    
+    func loadData() {
+        Publishers.Zip(newsService.getNews(), stocksService.getStocks())
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+            } receiveValue: { [weak self] news, stocks in
+                self?.updateStocks(stocks)
+                self?.updateNews(news)
+                self?.startMonitoringStocks()
+            }
+            .store(in: &subscriptions)
+    }
+    
+    func loadStocks() {
+        stocksService
+            .getStocks()
+            .sink { _ in
+            } receiveValue: { [weak self] stocksModel in
+                self?.updateStocks(stocksModel)
+            }
+            .store(in: &subscriptions)
     }
 }
