@@ -65,7 +65,7 @@ final class HomeCollectionViewLayout {
         )
         
         item.contentInsets = NSDirectionalEdgeInsets(
-            top: Paddings.xxxs,
+            top: Paddings.s,
             leading: Paddings.xxxs,
             bottom: Paddings.xxxs,
             trailing: Paddings.xxxs)
