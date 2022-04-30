@@ -17,8 +17,4 @@ extension ModulesFactory: ModulesFactoryProtocol {
     func createHome(output: HomeOutput?) -> HomeModule {
         HomeConfigurator().configure(dependencies: dependencies, output: output)
     }
-    
-    func createMainNewsList(output: MainNewsListOutput?) -> MainNewsListModule {
-        return MainNewsListConfigurator().configure(dependencies: dependencies, output: output)
-    }
 }
