@@ -79,7 +79,6 @@ final class HomeViewModel: ObservableObject {
             } receiveValue: { [weak self] news, stocks in
                 self?.updateStocks(stocks)
                 self?.updateNews(news)
-                self?.startMonitoringStocks()
             }
             .store(in: &subscriptions)
     }

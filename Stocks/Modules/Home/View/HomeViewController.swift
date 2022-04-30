@@ -73,6 +73,18 @@ final class HomeViewController: UIViewController {
         viewModel.loadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.startMonitoringStocks()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        viewModel.stopMonitoringStocks()
+        
+        super.viewDidDisappear(animated)
+    }
+    
     private func setupUI() {
         view.addSubview(collectionView)
     }
