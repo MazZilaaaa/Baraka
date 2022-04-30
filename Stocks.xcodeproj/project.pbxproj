@@ -31,6 +31,7 @@
 		336141AC281C6A220016247E /* HomeCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336141AB281C6A220016247E /* HomeCollectionViewLayout.swift */; };
 		336141AE281CAAB10016247E /* LRUCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336141AD281CAAB00016247E /* LRUCache.swift */; };
 		336141B8281CAB540016247E /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336141B7281CAB540016247E /* LinkedList.swift */; };
+		337657ED281DB24500CB6105 /* SwiftCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 337657EC281DB24500CB6105 /* SwiftCSV */; };
 		33766054281AD68A000047C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33766053281AD68A000047C6 /* AppDelegate.swift */; };
 		3376605D281AD68D000047C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3376605C281AD68D000047C6 /* Assets.xcassets */; };
 		33766060281AD68D000047C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3376605E281AD68D000047C6 /* LaunchScreen.storyboard */; };
@@ -136,6 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				337657ED281DB24500CB6105 /* SwiftCSV in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +497,9 @@
 			dependencies = (
 			);
 			name = Stocks;
+			packageProductDependencies = (
+				337657EC281DB24500CB6105 /* SwiftCSV */,
+			);
 			productName = Stocks;
 			productReference = 33766050281AD68A000047C6 /* Stocks.app */;
 			productType = "com.apple.product-type.application";
@@ -567,6 +572,9 @@
 				Base,
 			);
 			mainGroup = 33766047281AD68A000047C6;
+			packageReferences = (
+				337657EB281DB24500CB6105 /* XCRemoteSwiftPackageReference "SwiftCSV" */,
+			);
 			productRefGroup = 33766051281AD68A000047C6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -992,6 +1000,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		337657EB281DB24500CB6105 /* XCRemoteSwiftPackageReference "SwiftCSV" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swiftcsv/SwiftCSV.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.6.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		337657EC281DB24500CB6105 /* SwiftCSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 337657EB281DB24500CB6105 /* XCRemoteSwiftPackageReference "SwiftCSV" */;
+			productName = SwiftCSV;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 33766048281AD68A000047C6 /* Project object */;
 }
