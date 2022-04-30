@@ -21,12 +21,41 @@ final class HomeCollectionViewLayout {
         let section = sectionsModel.allSections[sectionIndex]
         switch section.type {
         case .stocks:
-            return self.generateMajorNewsLayout()
+            return self.generateStocksLayout()
         case .majorNews:
             return self.generateMajorNewsLayout()
         case .news:
             return self.generateNewsLayout(itemsCount: section.items.count)
         }
+    }
+    
+    private func generateStocksLayout() -> NSCollectionLayoutSection {
+        let item = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .fractionalWidth(1/2)
+            )
+        )
+        
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: Paddings.xxxs,
+            leading: Paddings.xxxs,
+            bottom: Paddings.xxxs,
+            trailing: Paddings.xxxs)
+        
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(0.32),
+                heightDimension: .fractionalWidth(0.2)
+            ),
+            subitem: item,
+            count: 1
+        )
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .groupPaging
+        
+        return section
     }
     
     private func generateMajorNewsLayout() -> NSCollectionLayoutSection {
@@ -82,7 +111,6 @@ final class HomeCollectionViewLayout {
         )
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPaging
         
         return section
     }
