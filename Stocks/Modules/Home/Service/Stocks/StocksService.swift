@@ -18,7 +18,7 @@ extension StocksService: StocksServiceProtocol {
         fetchData(.stocks)
             .tryMap { response -> CSV in
                 guard let strCSV = String(data: response.data, encoding: .utf8) else {
-                    throw NetworkServiceError.unexpectedData
+                    throw NetworkError.unexpectedData
                 }
                 
                 return try CSV(string: strCSV)

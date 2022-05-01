@@ -22,6 +22,7 @@ final class HomeViewModel: ObservableObject {
     // MARK: - Environment
     
     @Published var sections: HomeSectionsModel = HomeSectionsModel()
+    @Published var error: Error? 
     
     private var subscriptions: Set<AnyCancellable> = []
     private var monitoringStocksToken: AnyCancellable?
@@ -79,7 +80,10 @@ final class HomeViewModel: ObservableObject {
     func loadData() {
         Publishers.Zip(newsService.getNews(), stocksService.getStocks())
             .receive(on: DispatchQueue.main)
-            .sink { _ in
+            .sink { [weak self] completion in
+                if case let .failure(error) = completion {
+                    self?.error = error
+                }
             } receiveValue: { [weak self] news, stocks in
                 self?.updateStocks(stocks)
                 self?.updateNews(news)

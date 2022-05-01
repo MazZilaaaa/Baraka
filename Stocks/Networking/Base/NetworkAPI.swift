@@ -14,4 +14,12 @@ protocol NetworkAPI {
     var path: String { get }
     
     var method: HttpMethod { get }
+    
+    var sampleData: Data { get }
+}
+
+extension NetworkAPI {
+    var sampleData: Data {
+        return Data()
+    }
 }

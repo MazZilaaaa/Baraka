@@ -52,7 +52,9 @@ extension AppDelegate: UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        configureApp()
+        if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil {
+            configureApp()
+        }
         
         return true
     }

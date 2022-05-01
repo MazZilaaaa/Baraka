@@ -8,7 +8,7 @@
 import Combine
 import UIKit
 
-final class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController, AlertPresentable {
     
     // MARK: - ViewModel
     
@@ -110,6 +110,18 @@ final class HomeViewController: UIViewController {
                 
                 self.collectionViewLayout.sectionsModel = sections
                 self.collectionViewDataSource.sectionsModel = sections
+            })
+            .store(in: &subscriptions)
+        
+        viewModel
+            .$error
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] error in
+                guard let error = error else {
+                    return
+                }
+                
+                self?.showAlert(actionTitle: Localizable.ok.rawValue, message: error.localizedDescription)
             })
             .store(in: &subscriptions)
     }

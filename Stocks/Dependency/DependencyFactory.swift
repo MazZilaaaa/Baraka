@@ -10,16 +10,11 @@ final class DependencyFactory: DependencyFactoryProtocol {
     // MARK: - Services
     
     var newsService: NewsServiceProtocol {
-        return NewsService(
-            jsonDecoder: .decoder,
-            urlRequestBuilder: URLRequestBuilder.builder
-        )
+        return NewsService()
     }
     
     var stocksService: StocksServiceProtocol {
-        return StocksService(
-            jsonDecoder: .decoder,
-            urlRequestBuilder: URLRequestBuilder.builder)
+        return StocksService()
     }
     
     // MARK: - Storages

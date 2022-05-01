@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  EventsList
+
+  Created by Aleksandr Fadeev on 14.04.2022.
+  
+*/
+
+// Common
+
+"ok" = "ok";
+"error" = "error";
+
+
+// Errors
+
+"unexpectedData" = "Unexpected data";
+"unknownError" = "Unknown error";
+"serverError" = "Server request error";
+"badResponse" = "Bad response";
+"badRequest" = "Check your params";
