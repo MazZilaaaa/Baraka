@@ -13,6 +13,14 @@ enum Localizable: String {
 }
 
 extension Localizable {
+    enum Home: String {
+        case stocks
+        case majorNews
+        case news
+    }
+}
+
+extension Localizable {
     enum Errors: String {
         case unexpectedData
         case internetConnectionError
@@ -24,6 +32,12 @@ extension Localizable {
 }
 
 extension Localizable {
+    var localizableString: String {
+        NSLocalizedString(rawValue)
+    }
+}
+
+extension Localizable.Home {
     var localizableString: String {
         NSLocalizedString(rawValue)
     }

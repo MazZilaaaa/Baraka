@@ -22,9 +22,8 @@ final class HomeStockCell: UICollectionViewCell {
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.systemFont(ofSize: 16)
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         titleLabel.numberOfLines = 2
-        titleLabel.textColor = .black
         
         return titleLabel
     }()
@@ -32,9 +31,8 @@ final class HomeStockCell: UICollectionViewCell {
     private lazy var priceLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.preferredFont(forTextStyle: .body)
         label.numberOfLines = 2
-        label.textColor = .black
         
         return label
     }()

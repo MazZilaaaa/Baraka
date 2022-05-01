@@ -11,6 +11,11 @@
 "ok" = "ok";
 "error" = "error";
 
+// Home
+
+"stocks" = "Stocks";
+"majorNews" = "Major news";
+"news" = "News";
 
 // Errors
 

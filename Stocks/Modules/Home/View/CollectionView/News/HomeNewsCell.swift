@@ -52,9 +52,8 @@ final class HomeNewsCell: UICollectionViewCell {
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.systemFont(ofSize: 16)
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .body)
         titleLabel.numberOfLines = 2
-        titleLabel.textColor = .black
         
         return titleLabel
     }()
@@ -62,9 +61,8 @@ final class HomeNewsCell: UICollectionViewCell {
     private lazy var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.font = UIFont.systemFont(ofSize: 12)
+        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.textColor = .black
         descriptionLabel.lineBreakMode = .byWordWrapping
         
         return descriptionLabel
@@ -73,9 +71,8 @@ final class HomeNewsCell: UICollectionViewCell {
     private lazy var authorLabel: UILabel = {
         let authorLabel = UILabel()
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
-        authorLabel.font = UIFont.systemFont(ofSize: 10)
+        authorLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
         authorLabel.lineBreakMode = .byWordWrapping
-        authorLabel.textColor = .black
         authorLabel.textAlignment = .right
         
         return authorLabel
@@ -84,9 +81,8 @@ final class HomeNewsCell: UICollectionViewCell {
     private lazy var dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        authorLabel.setContentHuggingPriority(.required, for: .horizontal)
-        dateLabel.font = UIFont.systemFont(ofSize: 10)
-        dateLabel.textColor = .black
+        dateLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+        dateLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
         
         return dateLabel
     }()

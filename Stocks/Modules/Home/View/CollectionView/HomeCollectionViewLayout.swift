@@ -44,14 +44,24 @@ final class HomeCollectionViewLayout {
         
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.32),
+                widthDimension: .fractionalWidth(0.24),
                 heightDimension: .fractionalWidth(0.2)
             ),
             subitem: item,
             count: 1
         )
         
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .estimated(44)
+            ),
+            elementKind: HomeSectionHeaderView.identifier,
+            alignment: .top
+        )
+        
         let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [sectionHeader]
         section.orthogonalScrollingBehavior = .groupPaging
         
         return section
@@ -80,7 +90,17 @@ final class HomeCollectionViewLayout {
             count: 1
         )
         
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .estimated(44)
+            ),
+            elementKind: HomeSectionHeaderView.identifier,
+            alignment: .top
+        )
+        
         let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [sectionHeader]
         section.orthogonalScrollingBehavior = .groupPaging
         
         return section
@@ -109,7 +129,18 @@ final class HomeCollectionViewLayout {
             count: itemsCount
         )
         
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .estimated(44)
+            ),
+            elementKind: HomeSectionHeaderView.identifier,
+            alignment: .top
+        )
+        
         let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [sectionHeader]
+        section.orthogonalScrollingBehavior = .groupPaging
         
         return section
     }

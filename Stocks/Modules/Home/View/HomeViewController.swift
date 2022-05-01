@@ -47,6 +47,11 @@ final class HomeViewController: UIViewController, AlertPresentable {
         collectionView.register(HomeStockCell.self, forCellWithReuseIdentifier: HomeStockCell.identifier)
         collectionView.register(HomeMajorNewCell.self, forCellWithReuseIdentifier: HomeMajorNewCell.identifier)
         collectionView.register(HomeNewsCell.self, forCellWithReuseIdentifier: HomeNewsCell.identifier)
+        collectionView.register(
+            HomeSectionHeaderView.self,
+            forSupplementaryViewOfKind: HomeSectionHeaderView.identifier,
+            withReuseIdentifier: HomeSectionHeaderView.identifier
+        )
         
         return collectionView
     }()

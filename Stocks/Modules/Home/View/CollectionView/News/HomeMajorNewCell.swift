@@ -22,9 +22,8 @@ final class HomeMajorNewCell: UICollectionViewCell {
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.systemFont(ofSize: 16)
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         titleLabel.numberOfLines = 2
-        titleLabel.textColor = .black
         
         return titleLabel
     }()

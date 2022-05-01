@@ -69,7 +69,14 @@ final class HomeCollectonViewDataSource {
     }
     
     private func createSupplementaryView(collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? {
-        return nil
+        let supplementaryView = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: HomeSectionHeaderView.identifier,
+            for: indexPath) as? HomeSectionHeaderView
+        
+        supplementaryView?.headerViewModel = sectionsModel.orderedSections[indexPath.section]
+        
+        return supplementaryView
     }
     
     private func createSnapshot(sectionsModel: HomeSectionsModel) -> NSDiffableDataSourceSnapshot<HomeSectionModelType, AnyHashable> {
