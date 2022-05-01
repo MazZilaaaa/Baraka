@@ -9,9 +9,11 @@ import UIKit
 
 final class HomeSectionHeaderView: UICollectionReusableView {
     
-    var headerViewModel: HomeSectionModel? {
+    // MARK: - ViewModel
+    
+    var viewModel: HomeSectionModel? {
         didSet {
-            configure(by: headerViewModel)
+            configure(by: viewModel)
         }
     }
     
@@ -47,7 +49,7 @@ final class HomeSectionHeaderView: UICollectionReusableView {
     private func setupLayout() {
         addConstraints([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
-            titleLabel.leftAnchor.constraint(equalTo: leftAnchor),
+            titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: Paddings.xxs),
             titleLabel.rightAnchor.constraint(equalTo: rightAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])

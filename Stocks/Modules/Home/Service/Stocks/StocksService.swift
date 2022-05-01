@@ -10,7 +10,6 @@ import SwiftCSV
 import OrderedCollections
 
 final class StocksService: NetworkService<StocksAPI> {
-    
 }
 
 extension StocksService: StocksServiceProtocol {

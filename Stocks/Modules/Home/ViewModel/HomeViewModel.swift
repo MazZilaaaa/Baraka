@@ -16,10 +16,12 @@ final class HomeViewModel: ObservableObject {
     private let stocksService: StocksServiceProtocol
     private let sectionsBuilder: HomeSectionBuilderProtocol
     
-    // MARK: - Environment
+    // MARK: - Published
     
     @Published var sections: HomeSectionsModel = HomeSectionsModel()
-    @Published var error: Error? 
+    @Published var error: Error?
+    
+    // MARK: - Environment
     
     private var subscriptions: Set<AnyCancellable> = []
     private var monitoringStocksToken: AnyCancellable?
@@ -33,6 +35,8 @@ final class HomeViewModel: ObservableObject {
         self.stocksService = stocksService
         self.sectionsBuilder = sectionsBuilder
     }
+    
+    // MARK: - Monitoring stocks update
     
     func monitoringIsActive() -> Bool {
         monitoringStocksToken != nil
@@ -55,6 +59,8 @@ final class HomeViewModel: ObservableObject {
         monitoringStocksToken?.cancel()
         monitoringStocksToken = nil
     }
+    
+    // MARK: - Load data
     
     func loadData() {
         Publishers.Zip(stocksService.getStocks(), newsService.getNews())
@@ -84,6 +90,8 @@ final class HomeViewModel: ObservableObject {
             }
             .store(in: &subscriptions)
     }
+    
+    // MARK: - Helpers
     
     private func buildSections(stocksModels: StocksModel, newsModels: NewsModel) -> HomeSectionsModel {
         var sections = HomeSectionsModel()

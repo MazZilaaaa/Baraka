@@ -16,6 +16,4 @@ final class DependencyFactory: DependencyFactoryProtocol {
     var stocksService: StocksServiceProtocol {
         return StocksService()
     }
-    
-    // MARK: - Storages
 }

@@ -74,7 +74,7 @@ final class HomeCollectonViewDataSource {
             withReuseIdentifier: HomeSectionHeaderView.identifier,
             for: indexPath) as? HomeSectionHeaderView
         
-        supplementaryView?.headerViewModel = sectionsModel.orderedSections[indexPath.section]
+        supplementaryView?.viewModel = sectionsModel.orderedSections[indexPath.section]
         
         return supplementaryView
     }

@@ -9,6 +9,8 @@ import UIKit
 
 final class HomeNewsCell: UICollectionViewCell {
     
+    // MARK: - ViewModel
+    
     var viewModel: HomeNewsCellModel? {
         didSet {
             configure(by: viewModel)

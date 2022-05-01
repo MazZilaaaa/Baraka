@@ -64,7 +64,11 @@ final class HomeViewController: UIViewController, AlertPresentable {
         return HomeCollectionViewLayout()
     }()
     
+    // MARK: - Environment
+    
     private var subscriptions: Set<AnyCancellable> = []
+    
+    // MARK: - Init
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -76,9 +80,7 @@ final class HomeViewController: UIViewController, AlertPresentable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func handleRefreshControllChanged() {
-        viewModel.loadData()
-    }
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,6 +98,8 @@ final class HomeViewController: UIViewController, AlertPresentable {
         super.viewDidDisappear(animated)
     }
     
+    // MARK: - Setup
+    
     private func setupUI() {
         view.addSubview(collectionView)
         view.addSubview(loadingIndicator)
@@ -112,6 +116,8 @@ final class HomeViewController: UIViewController, AlertPresentable {
             loadingIndicator.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor)
         ])
     }
+    
+    // MARK: - Bindings
     
     private func bindViewModel() {
         viewModel
@@ -142,5 +148,11 @@ final class HomeViewController: UIViewController, AlertPresentable {
                 self?.showAlert(actionTitle: Localizable.ok.rawValue, message: error.localizedDescription)
             })
             .store(in: &subscriptions)
+    }
+    
+    // MARK: - Handlers
+    
+    @objc private func handleRefreshControllChanged() {
+        viewModel.loadData()
     }
 }
