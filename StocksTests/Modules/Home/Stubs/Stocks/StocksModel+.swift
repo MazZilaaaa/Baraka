@@ -8,11 +8,10 @@
 @testable import Stocks
 
 import Foundation
-import OrderedCollections
 
 extension StocksModel {
     static func stub(
-        stocks: OrderedDictionary<StockModel, [StockPriceModel]> = [:]
+        stocks: [StockModel] = [.stub()]
     ) -> StocksModel {
         StocksModel(stocks: stocks)
     }

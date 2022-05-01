@@ -10,7 +10,10 @@
 import Foundation
 
 extension StockModel {
-    static func stub(stockName: String = "stockName") -> StockModel {
-        StockModel(stock: stockName)
+    static func stub(
+        stockName: String = "stockName",
+        prices: [StockPriceModel] = [.stub()]
+    ) -> StockModel {
+        StockModel(stock: stockName, prices: prices)
     }
 }

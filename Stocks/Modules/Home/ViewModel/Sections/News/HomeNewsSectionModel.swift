@@ -9,3 +9,6 @@ struct HomeNewsSectionModel: HomeSectionModel {
     let type: HomeSectionModelType = .news
     var items: [AnyHashable] = []
 }
+
+extension HomeNewsSectionModel: Equatable {
+}

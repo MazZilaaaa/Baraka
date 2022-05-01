@@ -23,24 +23,33 @@ extension StocksService: StocksServiceProtocol {
                 
                 return try CSV(string: strCSV)
             }
-            .tryMap({ csv in
-                let stocks = csv.namedRows.reduce(into: OrderedDictionary<StockModel, [StockPriceModel]>()) { partialResult, row in
-                    guard let stockPriceModel = StockPriceModel(from: row) else {
-                        return
-                    }
-                    
-                    let stockModel = StockModel(stock: stockPriceModel.stock)
-                    var stockPriceModels: [StockPriceModel] = []
-                    if let oldStockPriceModels = partialResult[stockModel] {
-                        stockPriceModels = oldStockPriceModels
-                    }
-                    
-                    stockPriceModels.append(stockPriceModel)
-                    partialResult[stockModel] = stockPriceModels
+            .map { [weak self] csv in
+                guard let self = self else {
+                    return StocksModel(stocks: [])
                 }
                 
-                return StocksModel(stocks: stocks)
-            })
+                return self.decodeStocksModels(from: csv)
+            }
             .eraseToAnyPublisher()
+    }
+    
+    private func decodeStocksModels(from csv: CSV) -> StocksModel {
+        let stocksModels = csv.namedRows.reduce(into: OrderedDictionary<String, StockModel>()) { stocksModels, row in
+            guard let stockPriceModel = StockPriceModel(from: row) else {
+                return
+            }
+            
+            var stockModel: StockModel
+            if let oldStockModel = stocksModels[stockPriceModel.stock] {
+                stockModel = oldStockModel
+            } else {
+                stockModel = StockModel(stock: stockPriceModel.stock, prices: [stockPriceModel])
+            }
+            
+            stockModel.prices.append(stockPriceModel)
+            stocksModels[stockPriceModel.stock] = stockModel
+        }
+        
+        return StocksModel(stocks: stocksModels.values.map { $0 })
     }
 }

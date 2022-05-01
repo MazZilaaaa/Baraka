@@ -10,5 +10,5 @@ import Foundation
 protocol HomeSectionBuilderProtocol {
     func buildMajorNewsSection(newsModels: [NewModel]) -> HomeMajorNewsSectionModel
     func buildNewsSection(newsModels: [NewModel]) -> HomeNewsSectionModel
-    func buildStocksSection(stocksModels: StocksModel) -> HomeStockSectionModel
+    func buildStocksSection(stocksModels: [StockModel]) -> HomeStockSectionModel
 }

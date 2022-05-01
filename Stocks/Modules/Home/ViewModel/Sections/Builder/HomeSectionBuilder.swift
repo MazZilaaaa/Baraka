@@ -27,9 +27,9 @@ extension HomeSectionBuilder: HomeSectionBuilderProtocol {
         return HomeNewsSectionModel(items: newsItems)
     }
     
-    func buildStocksSection(stocksModels: StocksModel) -> HomeStockSectionModel {
-        let stocksItems: [HomeStockCellModel] = stocksModels.stocks.values.compactMap { prices in
-            guard let stockPrice = prices.randomElement() else {
+    func buildStocksSection(stocksModels: [StockModel]) -> HomeStockSectionModel {
+        let stocksItems: [HomeStockCellModel] = stocksModels.compactMap { stockModel in
+            guard let stockPrice = stockModel.prices.randomElement() else {
                 return nil
             }
             

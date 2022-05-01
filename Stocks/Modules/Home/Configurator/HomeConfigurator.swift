@@ -16,7 +16,8 @@ final class HomeConfigurator {
     ) -> HomeModule {
         let vm = HomeViewModel(
             newsService: dependencies.newsService,
-            stocksService: dependencies.stocksService
+            stocksService: dependencies.stocksService,
+            sectionsBuilder: HomeSectionBuilder()
         )
         
         let vc = HomeViewController(viewModel: vm)

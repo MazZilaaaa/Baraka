@@ -10,6 +10,38 @@
 import Combine
 import Foundation
 
+final class HomeSectionBuilderMock: HomeSectionBuilderProtocol {
+    
+    var stocksSectionStub: HomeStockSectionModel!
+    var receivedStocksModel: [StockModel]?
+    var buildStocksSectionCalled = false
+    
+    func buildStocksSection(stocksModels: [StockModel]) -> HomeStockSectionModel {
+        receivedStocksModel = stocksModels
+        return stocksSectionStub
+    }
+    
+    var majorNewsSectionStub: HomeMajorNewsSectionModel!
+    var receivedMajorNewsModel: [NewModel]?
+    var buildMajorNewsSectionCalled = false
+    
+    func buildMajorNewsSection(newsModels: [NewModel]) -> HomeMajorNewsSectionModel {
+        receivedMajorNewsModel = newsModels
+        
+        return majorNewsSectionStub
+    }
+    
+    var newsSectionStub: HomeNewsSectionModel!
+    var receivedNewsModel: [NewModel]?
+    var buildNewsSectionCalled = false
+    
+    func buildNewsSection(newsModels: [NewModel]) -> HomeNewsSectionModel {
+        receivedNewsModel = newsModels
+        
+        return newsSectionStub
+    }
+}
+
 final class NewsServiceMock: NewsServiceProtocol {
     
     var getNewsStub: AnyPublisher<NewsModel, Error>!

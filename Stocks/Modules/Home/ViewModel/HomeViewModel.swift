@@ -38,6 +38,10 @@ final class HomeViewModel: ObservableObject {
         self.sectionsBuilder = sectionsBuilder
     }
     
+    func monitoringIsActive() -> Bool {
+        monitoringStocksToken != nil
+    }
+    
     func startMonitoringStocks() {
         monitoringStocksToken = Timer.publish(
             every: 1,
@@ -53,6 +57,7 @@ final class HomeViewModel: ObservableObject {
     
     func stopMonitoringStocks() {
         monitoringStocksToken?.cancel()
+        monitoringStocksToken = nil
     }
     
     func loadData() {
@@ -77,7 +82,7 @@ final class HomeViewModel: ObservableObject {
             .getStocks()
             .sink { _ in
             } receiveValue: { [weak self] stocksModel in
-                self?.sections.stocksSection = self?.sectionsBuilder.buildStocksSection(stocksModels: stocksModel)
+                self?.sections.stocksSection = self?.sectionsBuilder.buildStocksSection(stocksModels: stocksModel.stocks)
             }
             .store(in: &subscriptions)
     }
@@ -85,9 +90,15 @@ final class HomeViewModel: ObservableObject {
     private func buildSections(stocksModels: StocksModel, newsModels: NewsModel) -> HomeSectionsModel {
         var sections = HomeSectionsModel()
         
-        sections.majorNewsSection = sectionsBuilder.buildMajorNewsSection(newsModels: newsModels.prefix(6))
-        sections.stocksSection = sectionsBuilder.buildStocksSection(stocksModels: stocksModels)
-        sections.newsSection = sectionsBuilder.buildNewsSection(newsModels: newsModels)
+        let majorNewsModels = Array(newsModels.articles.prefix(6))
+        sections.majorNewsSection = sectionsBuilder.buildMajorNewsSection(newsModels: majorNewsModels)
+        
+        if newsModels.articles.count > 6 {
+            let remainingNews = Array(newsModels.articles.suffix(from: 6))
+            sections.newsSection = sectionsBuilder.buildNewsSection(newsModels: remainingNews)
+        }
+        
+        sections.stocksSection = sectionsBuilder.buildStocksSection(stocksModels: stocksModels.stocks)
         
         return sections
     }

@@ -8,14 +8,18 @@
 @testable import Stocks
 
 import Combine
-import OrderedCollections
 import XCTest
+
+enum HomeViewModelTestsError: Error {
+    case testError
+}
 
 final class HomeViewModelTests: XCTestCase {
     private var viewModel: HomeViewModel!
     
     private var newsService: NewsServiceMock!
     private var stocksService: StocksServiceMock!
+    private var sectionBuilder: HomeSectionBuilderMock!
     
     private var subscriptions: Set<AnyCancellable> = []
     
@@ -24,8 +28,13 @@ final class HomeViewModelTests: XCTestCase {
         
         newsService = NewsServiceMock()
         stocksService = StocksServiceMock()
+        sectionBuilder = HomeSectionBuilderMock()
         
-        viewModel = HomeViewModel(newsService: newsService, stocksService: stocksService)
+        viewModel = HomeViewModel(
+            newsService: newsService,
+            stocksService: stocksService,
+            sectionsBuilder: sectionBuilder
+        )
     }
     
     override func tearDown() {
@@ -39,30 +48,36 @@ final class HomeViewModelTests: XCTestCase {
     
     func test_loadData() {
         // given
-        let newsModel: NewsModel = .stub(
-            status: .ok,
-            articles: [
-                .stub()
-            ]
-        )
-        
-        let stocks: OrderedDictionary<StockModel, [StockPriceModel]> = [
-            .stub() : [.stub()]
+        let stockModel: [StockModel] = [
+            .stub()
         ]
         
-        let stocksModel: StocksModel = .stub(stocks: stocks)
+        let news: [NewModel] = [
+            .stub(),
+            .stub(),
+            .stub(),
+            .stub(),
+            .stub(),
+            .stub(),
+            .stub(),
+        ]
         
-        newsService.getNewsStub = Result.Publisher(newsModel).eraseToAnyPublisher()
+        let stocksModel: StocksModel = .stub(stocks: stockModel)
+        let newsModel: NewsModel = .stub(articles: news)
+        
         stocksService.getStocksStub = Result.Publisher(stocksModel).eraseToAnyPublisher()
+        newsService.getNewsStub = Result.Publisher(newsModel).eraseToAnyPublisher()
+        
+        sectionBuilder.stocksSectionStub = HomeStockSectionModel()
+        sectionBuilder.majorNewsSectionStub = HomeMajorNewsSectionModel()
+        sectionBuilder.newsSectionStub = HomeNewsSectionModel()
         
         let expectation = expectation(description: "test_loadData")
         
-        var receivedSections: HomeSectionsModel?
         viewModel
             .$sections
             .dropFirst()
-            .sink { sections in
-                receivedSections = sections
+            .sink { _ in
                 expectation.fulfill()
             }
             .store(in: &subscriptions)
@@ -73,9 +88,81 @@ final class HomeViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 0.2)
         
         // then
-        XCTAssertEqual(receivedSections?.stocksSection?.items.count, 1)
-        XCTAssertEqual(receivedSections?.majorNewsSection?.items.count, 1)
-        XCTAssertNil(viewModel.sections.newsSection)
+        XCTAssertEqual(sectionBuilder.receivedStocksModel?.count, 1)
+        XCTAssertEqual(sectionBuilder.receivedMajorNewsModel?.count, 6)
+        XCTAssertEqual(sectionBuilder.receivedNewsModel?.count, 1)
         
+        XCTAssertEqual(viewModel.sections.stocksSection, sectionBuilder.stocksSectionStub)
+        XCTAssertEqual(viewModel.sections.majorNewsSection, sectionBuilder.majorNewsSectionStub)
+        XCTAssertEqual(viewModel.sections.newsSection, sectionBuilder.newsSectionStub)
+    }
+    
+    func test_loadData_failed() {
+        // given
+        stocksService.getStocksStub = Result.Publisher(HomeViewModelTestsError.testError).eraseToAnyPublisher()
+        newsService.getNewsStub = Result.Publisher(HomeViewModelTestsError.testError).eraseToAnyPublisher()
+        
+        sectionBuilder.stocksSectionStub = HomeStockSectionModel()
+        
+        let expectation = expectation(description: "test_loadData_failed")
+        
+        viewModel
+            .$error
+            .dropFirst()
+            .sink { error in
+                expectation.fulfill()
+            }
+            .store(in: &subscriptions)
+        
+        
+        // when
+        viewModel.loadData()
+        wait(for: [expectation], timeout: 0.2)
+        
+        // then
+        XCTAssertNil(sectionBuilder.receivedStocksModel)
+        XCTAssertNil(sectionBuilder.receivedMajorNewsModel)
+        XCTAssertNil(sectionBuilder.receivedNewsModel)
+        
+        XCTAssertNotNil(viewModel.error)
+    }
+    
+    func test_startMonitoringStocks() {
+        // given
+        let stockModel: [StockModel] = [
+            .stub()
+        ]
+        
+        let stocksModel: StocksModel = .stub(stocks: stockModel)
+        stocksService.getStocksStub = Result.Publisher(stocksModel).eraseToAnyPublisher()
+        sectionBuilder.stocksSectionStub = HomeStockSectionModel()
+        
+        let expectation = expectation(description: "test_startMonitoringStocks")
+        
+        // when
+        viewModel.startMonitoringStocks()
+        
+        viewModel
+            .$sections
+            .dropFirst()
+            .sink { _ in
+                expectation.fulfill()
+            }
+            .store(in: &subscriptions)
+        
+        wait(for: [expectation], timeout: 2)
+        
+        XCTAssertNotNil(viewModel.sections.stocksSection)
+        XCTAssertEqual(viewModel.sections.stocksSection, sectionBuilder.stocksSectionStub)
+    }
+    
+    func test_stopMonitoringStocks() {
+        
+        // when
+        viewModel.startMonitoringStocks()
+        viewModel.stopMonitoringStocks()
+        
+        // then
+        XCTAssertFalse(viewModel.monitoringIsActive())
     }
 }

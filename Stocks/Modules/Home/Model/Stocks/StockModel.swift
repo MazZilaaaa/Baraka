@@ -7,4 +7,5 @@
 
 struct StockModel: Hashable {
     let stock: String
+    var prices: [StockPriceModel]
 }
