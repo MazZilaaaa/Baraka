@@ -76,7 +76,6 @@
 		338C8E1A281EE9DC00F8F968 /* HomeSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338C8E19281EE9DC00F8F968 /* HomeSectionHeaderView.swift */; };
 		338C8E1C281EEACC00F8F968 /* UICollectionReusableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338C8E1B281EEACC00F8F968 /* UICollectionReusableView+.swift */; };
 		338C8E1E281EF13A00F8F968 /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338C8E1D281EF13A00F8F968 /* AppCoordinatorTests.swift */; };
-		339E2A32281EB40600981DC9 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339E2A31281EB40600981DC9 /* APIError.swift */; };
 		339E2A34281EB7A100981DC9 /* AlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339E2A33281EB7A100981DC9 /* AlertPresentable.swift */; };
 		339E2A37281EB81400981DC9 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339E2A36281EB81400981DC9 /* Localizable.swift */; };
 		339E2A3B281EB86600981DC9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 339E2A39281EB86600981DC9 /* Localizable.strings */; };
@@ -172,7 +171,6 @@
 		338C8E19281EE9DC00F8F968 /* HomeSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionHeaderView.swift; sourceTree = "<group>"; };
 		338C8E1B281EEACC00F8F968 /* UICollectionReusableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+.swift"; sourceTree = "<group>"; };
 		338C8E1D281EF13A00F8F968 /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
-		339E2A31281EB40600981DC9 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		339E2A33281EB7A100981DC9 /* AlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentable.swift; sourceTree = "<group>"; };
 		339E2A36281EB81400981DC9 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		339E2A3A281EB86600981DC9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
@@ -509,10 +507,10 @@
 		33766052281AD68A000047C6 /* Stocks */ = {
 			isa = PBXGroup;
 			children = (
+				33766083281AD73A000047C6 /* App */,
 				339E2A35281EB80E00981DC9 /* Localizable */,
 				336141A8281C601C0016247E /* Constants */,
 				336141A1281C58A60016247E /* Utils */,
-				33766083281AD73A000047C6 /* App */,
 				3376608B281ADC65000047C6 /* Dependency */,
 				33766096281AE28B000047C6 /* Networking */,
 				337660B3281B00EB000047C6 /* Extensions */,
@@ -596,11 +594,6 @@
 			children = (
 				337660A9281AECF7000047C6 /* URLRequest */,
 				337660A8281AECE4000047C6 /* Service */,
-				33766099281AE638000047C6 /* Response.swift */,
-				337660A1281AECA9000047C6 /* NetworkAPI.swift */,
-				337660A3281AECC3000047C6 /* HttpMethod.swift */,
-				339E2A31281EB40600981DC9 /* APIError.swift */,
-				337660A5281AECCE000047C6 /* NetworkError.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -608,6 +601,10 @@
 		337660A8281AECE4000047C6 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				337660A3281AECC3000047C6 /* HttpMethod.swift */,
+				33766099281AE638000047C6 /* Response.swift */,
+				337660A1281AECA9000047C6 /* NetworkAPI.swift */,
+				337660A5281AECCE000047C6 /* NetworkError.swift */,
 				33766097281AE5E7000047C6 /* NetworkService.swift */,
 				33765822281E923A00CB6105 /* NetworkProvider.swift */,
 			);
@@ -856,7 +853,6 @@
 				337660A0281AEC02000047C6 /* URLRequestBuilderProtocol.swift in Sources */,
 				336141A7281C59CC0016247E /* UIImageView+.swift in Sources */,
 				339E2A34281EB7A100981DC9 /* AlertPresentable.swift in Sources */,
-				339E2A32281EB40600981DC9 /* APIError.swift in Sources */,
 				33614192281C18FD0016247E /* NewSourceModel.swift in Sources */,
 				33765800281DCAB700CB6105 /* NumberFormatter+.swift in Sources */,
 				337657F2281DB2E700CB6105 /* StockPriceModel.swift in Sources */,

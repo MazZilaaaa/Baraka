@@ -35,7 +35,7 @@ class NetworkService<API: NetworkAPI> {
     
     func fetchData(_ api: API) -> AnyPublisher<Response<Data>, Error> {
         guard let request = urlRequestBuilder.buildRequest(api) else {
-            return Fail(error: APIError.badUrl).eraseToAnyPublisher()
+            return Fail(error: NetworkError.badUrl).eraseToAnyPublisher()
         }
         
         return networkProvider.fetch(from: request)

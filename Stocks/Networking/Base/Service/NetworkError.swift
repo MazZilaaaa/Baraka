@@ -8,6 +8,7 @@
 import Foundation
 
 enum NetworkError: Error {
+    case badUrl
     case unexpectedData
     case internetConnectionError
     case unknownError
@@ -19,6 +20,11 @@ enum NetworkError: Error {
 extension NetworkError: LocalizedError {
     public var errorDescription: String? {
         switch self {
+        case .badUrl:
+            return NSLocalizedString(
+                Localizable.Errors.badUrl.localizableString,
+                comment: String(describing: NetworkError.self)
+            )
         case .unexpectedData:
             return NSLocalizedString(
                 Localizable.Errors.unexpectedData.localizableString,

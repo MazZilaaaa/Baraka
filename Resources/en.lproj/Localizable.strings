@@ -19,6 +19,7 @@
 
 // Errors
 
+"badUrl" = "check url";
 "unexpectedData" = "Unexpected data";
 "internetConnectionError" = "Check internet connection";
 "unknownError" = "Unknown error";

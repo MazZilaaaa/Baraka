@@ -22,6 +22,7 @@ extension Localizable {
 
 extension Localizable {
     enum Errors: String {
+        case badUrl
         case unexpectedData
         case internetConnectionError
         case unknownError
