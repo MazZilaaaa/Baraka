@@ -64,6 +64,8 @@ final class HomeViewModel: ObservableObject {
         Publishers.Zip(stocksService.getStocks(), newsService.getNews())
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
+                self?.startMonitoringStocks()
+                
                 if case let .failure(error) = completion {
                     self?.error = error
                 }

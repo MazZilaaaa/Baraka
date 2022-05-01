@@ -8,5 +8,5 @@
 import Foundation
 
 extension Locale {
-    static let GB = Locale(identifier: "en_GB")
+    static let US = Locale(identifier: "en_US")
 }

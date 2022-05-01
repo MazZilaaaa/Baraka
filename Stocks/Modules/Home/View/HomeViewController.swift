@@ -23,6 +23,18 @@ final class HomeViewController: UIViewController, AlertPresentable {
         return refreshControl
     }()
     
+    // in production projects better do skeleton view
+    lazy var loadingIndicator: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorView.style = .medium
+        
+        activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.startAnimating()
+        
+        return activityIndicatorView
+    }()
+    
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(
             frame: .zero,
@@ -73,12 +85,6 @@ final class HomeViewController: UIViewController, AlertPresentable {
         viewModel.loadData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        viewModel.startMonitoringStocks()
-    }
-    
     override func viewDidDisappear(_ animated: Bool) {
         viewModel.stopMonitoringStocks()
         
@@ -87,19 +93,25 @@ final class HomeViewController: UIViewController, AlertPresentable {
     
     private func setupUI() {
         view.addSubview(collectionView)
+        view.addSubview(loadingIndicator)
     }
     
     private func setupLayout() {
-        let leftConstraint = collectionView.leftAnchor.constraint(equalTo: view.leftAnchor)
-        let topConstraint = collectionView.topAnchor.constraint(equalTo: view.topAnchor)
-        let rightConstraint = collectionView.rightAnchor.constraint(equalTo: view.rightAnchor)
-        let bottomConstraint = collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        view.addConstraints([leftConstraint, topConstraint, rightConstraint, bottomConstraint])
+        NSLayoutConstraint.activate([
+            collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            loadingIndicator.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor)
+        ])
     }
     
     private func bindViewModel() {
         viewModel
             .$sections
+            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] sections in
                 guard let self = self else {
@@ -107,6 +119,7 @@ final class HomeViewController: UIViewController, AlertPresentable {
                 }
                 
                 self.refreshControl.endRefreshing()
+                self.loadingIndicator.stopAnimating()
                 
                 self.collectionViewLayout.sectionsModel = sections
                 self.collectionViewDataSource.sectionsModel = sections

@@ -17,7 +17,7 @@ extension DateFormatter {
     
     static var fullDateFormatter: DateFormatter {
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.GB
+        dateFormatter.locale = Locale.US
         dateFormatter.setLocalizedDateFormatFromTemplate("ddMMMMyyyy")
         
         return dateFormatter
