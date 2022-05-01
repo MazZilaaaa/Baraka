@@ -17,7 +17,7 @@ final class HomeCollectionViewLayout {
     }
     
     private func createLayout(sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? {
-        let section = sectionsModel.allSections[sectionIndex]
+        let section = sectionsModel.orderedSections[sectionIndex]
         switch section.type {
         case .stocks:
             return self.generateStocksLayout()

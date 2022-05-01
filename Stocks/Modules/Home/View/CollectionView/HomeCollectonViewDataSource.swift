@@ -36,7 +36,7 @@ final class HomeCollectonViewDataSource {
     
     private func createCell(collectionView: UICollectionView, indexPath: IndexPath, itemIdentifier: AnyHashable) -> UICollectionViewCell? {
         var cell: UICollectionViewCell?
-        switch sectionsModel.allSections[indexPath.section].type {
+        switch sectionsModel.orderedSections[indexPath.section].type {
         case .stocks:
             let stockCell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: HomeStockCell.identifier,
@@ -75,7 +75,7 @@ final class HomeCollectonViewDataSource {
     private func createSnapshot(sectionsModel: HomeSectionsModel) -> NSDiffableDataSourceSnapshot<HomeSectionModelType, AnyHashable> {
         var snapshot = NSDiffableDataSourceSnapshot<HomeSectionModelType, AnyHashable>()
         
-        sectionsModel.allSections.forEach { section in
+        sectionsModel.orderedSections.forEach { section in
             snapshot.appendSections([section.type])
             snapshot.appendItems(section.items)
         }

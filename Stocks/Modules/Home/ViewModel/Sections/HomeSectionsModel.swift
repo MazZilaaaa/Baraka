@@ -15,7 +15,7 @@ struct HomeSectionsModel {
     var majorNewsSection: HomeMajorNewsSectionModel?
     var newsSection: HomeNewsSectionModel?
     
-    var allSections: [HomeSectionModel] {
+    var orderedSections: [HomeSectionModel] {
         var result: [HomeSectionModel] = []
         
         if let stocksSection = stocksSection {

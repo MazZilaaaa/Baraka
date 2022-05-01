@@ -237,9 +237,8 @@
 		3361416D281C0E770016247E /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				3361416E281C0EBC0016247E /* HomeNewsCell.swift */,
-				33614197281C1D240016247E /* HomeMajorNewCell.swift */,
-				337657FD281DCA3C00CB6105 /* HomeStockCell.swift */,
+				33765817281E876100CB6105 /* Stocks */,
+				33765816281E875800CB6105 /* News */,
 				3361419D281C2BFF0016247E /* HomeCollectonViewDataSource.swift */,
 				336141AB281C6A220016247E /* HomeCollectionViewLayout.swift */,
 			);
@@ -249,9 +248,9 @@
 		3361417C281C18220016247E /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				33765805281E84A800CB6105 /* Stocks */,
 				3376580B281E84E200CB6105 /* News */,
 				33765808281E84CC00CB6105 /* MajorNews */,
-				33765805281E84A800CB6105 /* Stocks */,
 				33614172281C10DF0016247E /* HomeSectionsModel.swift */,
 				3376580E281E851000CB6105 /* HomeSectionModelType.swift */,
 			);
@@ -261,12 +260,8 @@
 		33614182281C18FD0016247E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				33614183281C18FD0016247E /* NewModel.swift */,
-				33614184281C18FD0016247E /* NewsModel.swift */,
-				33614185281C18FD0016247E /* NewSourceModel.swift */,
-				337657FB281DC5EF00CB6105 /* StockModel.swift */,
-				337657F1281DB2E700CB6105 /* StockPriceModel.swift */,
-				337657F7281DBD6200CB6105 /* StocksModel.swift */,
+				33765812281E870F00CB6105 /* Stocks */,
+				33765813281E871800CB6105 /* News */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -274,10 +269,8 @@
 		3361418A281C18FD0016247E /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				3361418B281C18FD0016247E /* NewsServiceProtocol.swift */,
-				3361418C281C18FD0016247E /* NewsService.swift */,
-				337657EF281DB2BE00CB6105 /* StocksServiceProtocol.swift */,
-				337657F3281DB30A00CB6105 /* StocksService.swift */,
+				33765815281E872B00CB6105 /* Stocks */,
+				33765814281E872400CB6105 /* News */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -350,6 +343,61 @@
 				33614178281C15C30016247E /* HomeNewsCellModel.swift */,
 			);
 			path = News;
+			sourceTree = "<group>";
+		};
+		33765812281E870F00CB6105 /* Stocks */ = {
+			isa = PBXGroup;
+			children = (
+				337657FB281DC5EF00CB6105 /* StockModel.swift */,
+				337657F1281DB2E700CB6105 /* StockPriceModel.swift */,
+				337657F7281DBD6200CB6105 /* StocksModel.swift */,
+			);
+			path = Stocks;
+			sourceTree = "<group>";
+		};
+		33765813281E871800CB6105 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				33614183281C18FD0016247E /* NewModel.swift */,
+				33614184281C18FD0016247E /* NewsModel.swift */,
+				33614185281C18FD0016247E /* NewSourceModel.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		33765814281E872400CB6105 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				3361418B281C18FD0016247E /* NewsServiceProtocol.swift */,
+				3361418C281C18FD0016247E /* NewsService.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		33765815281E872B00CB6105 /* Stocks */ = {
+			isa = PBXGroup;
+			children = (
+				337657EF281DB2BE00CB6105 /* StocksServiceProtocol.swift */,
+				337657F3281DB30A00CB6105 /* StocksService.swift */,
+			);
+			path = Stocks;
+			sourceTree = "<group>";
+		};
+		33765816281E875800CB6105 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				3361416E281C0EBC0016247E /* HomeNewsCell.swift */,
+				33614197281C1D240016247E /* HomeMajorNewCell.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		33765817281E876100CB6105 /* Stocks */ = {
+			isa = PBXGroup;
+			children = (
+				337657FD281DCA3C00CB6105 /* HomeStockCell.swift */,
+			);
+			path = Stocks;
 			sourceTree = "<group>";
 		};
 		33766047281AD68A000047C6 = {
