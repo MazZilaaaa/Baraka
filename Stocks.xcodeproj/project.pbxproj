@@ -448,7 +448,6 @@
 				33765824281E965C00CB6105 /* Data */,
 				339E2A44281EC21C00981DC9 /* ViewModel */,
 				3376581A281E8AB500CB6105 /* Service */,
-				3376581E281E8B6D00CB6105 /* Mocks.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -525,6 +524,7 @@
 		33766069281AD68D000047C6 /* StocksTests */ = {
 			isa = PBXGroup;
 			children = (
+				338C8E1F281EF32E00F8F968 /* Helpers */,
 				3376582B281E9A2A00CB6105 /* Extensions */,
 				33765818281E8AA500CB6105 /* Modules */,
 			);
@@ -657,6 +657,14 @@
 				337660C2281B07FF000047C6 /* Locale+.swift */,
 			);
 			path = Locale;
+			sourceTree = "<group>";
+		};
+		338C8E1F281EF32E00F8F968 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3376581E281E8B6D00CB6105 /* Mocks.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		339E2A35281EB80E00981DC9 /* Localizable */ = {
