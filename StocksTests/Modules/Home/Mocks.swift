@@ -9,6 +9,7 @@
 
 import Combine
 import Foundation
+import UIKit
 
 final class HomeSectionBuilderMock: HomeSectionBuilderProtocol {
     
@@ -84,3 +85,42 @@ final class NetworkProviderMock: NetworkProviderProtocol {
         return fetchStub
     }
 }
+
+final class ModulesFactoryMock: ModulesFactoryProtocol {
+    
+    // MARK: - HomeModule
+    
+    var createHomeModuleCalled: Bool = false
+    var homeViewController = HomeViewControllerMock()
+    func createHomeModule() -> HomeModule {
+        createHomeModuleCalled = true
+        
+        let vm = HomeViewModel(
+            newsService: NewsServiceMock(),
+            stocksService: StocksServiceMock(),
+            sectionsBuilder: HomeSectionBuilderMock()
+        )
+        
+        return (vm, homeViewController)
+    }
+}
+
+final class HomeViewControllerMock: UIViewController {
+}
+
+final class NavigationControllerMock: UINavigationController {
+    var settedViewControllers: [UIViewController]?
+    var pushedViewController: UIViewController?
+    var animated: Bool?
+    
+    override func setViewControllers(_ viewControllers: [UIViewController], animated: Bool) {
+        settedViewControllers = viewControllers
+        self.animated = animated
+    }
+    
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        pushedViewController = viewController
+        self.animated = animated
+    }
+}
+
