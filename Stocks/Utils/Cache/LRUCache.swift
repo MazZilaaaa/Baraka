@@ -5,8 +5,6 @@
 //  Created by Aleksandr Fadeev on 30.04.2022.
 //
 
-import Foundation
-
 final class LRUCache<KeyType: Hashable> {
     private let maxSize: Int
     private var cache: [KeyType: Any] = [:]

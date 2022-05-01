@@ -7,7 +7,6 @@
 
 import Combine
 import Foundation
-import OrderedCollections
 
 final class HomeViewModel: ObservableObject {
     
@@ -36,11 +35,16 @@ final class HomeViewModel: ObservableObject {
     }
     
     func startMonitoringStocks() {
-        monitoringStocksToken = Timer.publish(every: 1, tolerance: 0.5, on: .main, in: .default)
-                .autoconnect()
-                .sink(receiveValue: { [weak self] _ in
-                    self?.loadStocks()
-                })
+        monitoringStocksToken = Timer.publish(
+            every: 1,
+            tolerance: 0.5,
+            on: .main,
+            in: .default
+        )
+            .autoconnect()
+            .sink(receiveValue: { [weak self] _ in
+                self?.loadStocks()
+            })
     }
     
     func stopMonitoringStocks() {

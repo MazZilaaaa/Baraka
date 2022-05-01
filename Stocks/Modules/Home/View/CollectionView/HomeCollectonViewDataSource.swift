@@ -5,7 +5,6 @@
 //  Created by Aleksandr Fadeev on 29.04.2022.
 //
 
-import Foundation
 import UIKit
 
 final class HomeCollectonViewDataSource {

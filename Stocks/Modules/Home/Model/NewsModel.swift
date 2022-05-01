@@ -5,8 +5,6 @@
 //  Created by Aleksandr Fadeev on 28.04.2022.
 //
 
-import Foundation
-
 enum NewsModelStatus: String, Codable {
     case ok
 }
