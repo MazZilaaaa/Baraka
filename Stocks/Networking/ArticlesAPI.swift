@@ -8,7 +8,7 @@
 import Foundation
 
 enum ArticlesAPI {
-    case articles
+    case news
 }
 
 extension ArticlesAPI: NetworkAPI {
@@ -18,7 +18,7 @@ extension ArticlesAPI: NetworkAPI {
     
     var path: String {
         switch self {
-        case .articles:
+        case .news:
             return "/NewsAPI/everything/cnn.json"
         }
     }

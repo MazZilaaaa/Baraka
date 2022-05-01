@@ -14,6 +14,7 @@ final class HomeViewModel: ObservableObject {
     
     private let newsService: NewsServiceProtocol
     private let stocksService: StocksServiceProtocol
+    private let sectionsBuilder: HomeSectionBuilderProtocol
     
     // MARK: - Output
     
@@ -29,10 +30,12 @@ final class HomeViewModel: ObservableObject {
     
     init(
         newsService: NewsServiceProtocol,
-        stocksService: StocksServiceProtocol
+        stocksService: StocksServiceProtocol,
+        sectionsBuilder: HomeSectionBuilderProtocol
     ) {
         self.newsService = newsService
         self.stocksService = stocksService
+        self.sectionsBuilder = sectionsBuilder
     }
     
     func startMonitoringStocks() {
@@ -52,52 +55,40 @@ final class HomeViewModel: ObservableObject {
         monitoringStocksToken?.cancel()
     }
     
-    func updateStocks(_ stocksModels: StocksModel) {
-        let stocksItems: [HomeStockCellModel] = stocksModels.stocks.values.compactMap { prices in
-            guard let stockPrice = prices.randomElement() else {
-                return nil
-            }
-            
-            return HomeStockCellModel(stockPriceModel: stockPrice)
-        }
-        
-        sections.stocksSection = HomeStockSectionModel(items: stocksItems)
-    }
-    
-    func updateNews(_ newsModels: NewsModel) {
-        let majorNewsItems = newsModels.articles.prefix(6).map {
-            HomeMajorNewCellModel(newModel: $0)
-        }
-        
-        let newsItems = newsModels.articles.suffix(from: 6).map {
-            HomeNewsCellModel(newModel: $0)
-        }
-        
-        sections.majorNewsSection = HomeMajorNewsSectionModel(items: majorNewsItems)
-        sections.newsSection = HomeNewsSectionModel(items: newsItems)
-    }
-    
     func loadData() {
-        Publishers.Zip(newsService.getNews(), stocksService.getStocks())
+        Publishers.Zip(stocksService.getStocks(), newsService.getNews())
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 if case let .failure(error) = completion {
                     self?.error = error
                 }
-            } receiveValue: { [weak self] news, stocks in
-                self?.updateStocks(stocks)
-                self?.updateNews(news)
+            } receiveValue: { [weak self] stocks, news in
+                guard let self = self else {
+                    return
+                }
+                
+                self.sections = self.buildSections(stocksModels: stocks, newsModels: news)
             }
             .store(in: &subscriptions)
     }
     
-    func loadStocks() {
+    private func loadStocks() {
         stocksService
             .getStocks()
             .sink { _ in
             } receiveValue: { [weak self] stocksModel in
-                self?.updateStocks(stocksModel)
+                self?.sections.stocksSection = self?.sectionsBuilder.buildStocksSection(stocksModels: stocksModel)
             }
             .store(in: &subscriptions)
+    }
+    
+    private func buildSections(stocksModels: StocksModel, newsModels: NewsModel) -> HomeSectionsModel {
+        var sections = HomeSectionsModel()
+        
+        sections.majorNewsSection = sectionsBuilder.buildMajorNewsSection(newsModels: newsModels.prefix(6))
+        sections.stocksSection = sectionsBuilder.buildStocksSection(stocksModels: stocksModels)
+        sections.newsSection = sectionsBuilder.buildNewsSection(newsModels: newsModels)
+        
+        return sections
     }
 }

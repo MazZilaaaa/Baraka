@@ -10,7 +10,27 @@
 import Combine
 import Foundation
 
+final class NewsServiceMock: NewsServiceProtocol {
+    
+    var getNewsStub: AnyPublisher<NewsModel, Error>!
+    
+    func getNews() -> AnyPublisher<NewsModel, Error> {
+        return getNewsStub
+    }
+}
+
+final class StocksServiceMock: StocksServiceProtocol {
+    
+    var getStocksStub: AnyPublisher<StocksModel, Error>!
+    
+    func getStocks() -> AnyPublisher<StocksModel, Error> {
+        return getStocksStub
+    }
+}
+
+
 final class URLRequestBuilderMock: URLRequestBuilderProtocol {
+    
     var receivedAPI: NetworkAPI?
     var buildRequestStub: URLRequest?
     
@@ -22,6 +42,7 @@ final class URLRequestBuilderMock: URLRequestBuilderProtocol {
 }
 
 final class NetworkProviderMock: NetworkProviderProtocol {
+    
     var receivedRequest: URLRequest?
     var fetchStub: AnyPublisher<Response<Data>, Error>!
     

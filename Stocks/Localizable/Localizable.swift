@@ -15,6 +15,7 @@ enum Localizable: String {
 extension Localizable {
     enum Errors: String {
         case unexpectedData
+        case internetConnectionError
         case unknownError
         case badRequest
         case badResponse

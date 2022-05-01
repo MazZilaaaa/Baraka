@@ -9,6 +9,7 @@ import Foundation
 
 enum NetworkError: Error {
     case unexpectedData
+    case internetConnectionError
     case unknownError
     case badResponse(response: URLResponse)
     case badRequest(response: HTTPURLResponse)
@@ -21,6 +22,11 @@ extension NetworkError: LocalizedError {
         case .unexpectedData:
             return NSLocalizedString(
                 Localizable.Errors.unexpectedData.localizableString,
+                comment: String(describing: NetworkError.self)
+            )
+        case .internetConnectionError:
+            return NSLocalizedString(
+                Localizable.Errors.internetConnectionError.localizableString,
                 comment: String(describing: NetworkError.self)
             )
         case .unknownError:

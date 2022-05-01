@@ -1,0 +1,45 @@
+{
+    "status": "ok",
+    "totalResults": 3,
+    "articles": [
+        {
+            "source": {
+                "id": "cnn",
+                "name": "CNN"
+            },
+            "author": "Brandon Tensley",
+            "title": "What Oklahoma's governor and others get wrong about tribal sovereignty",
+            "description": "Republican Gov. Kevin Stitt's comment about a landmark US Supreme Court case is \"irresponsible\" and \"part of a larger push to eradicate tribal sovereignty in this country,\" Crystal Echo Hawk told CNN.",
+            "url": "https://www.cnn.com/2022/04/21/politics/tribal-sovereignty-race-deconstructed-newsletter/index.html",
+            "urlToImage": "https://media.cnn.com/api/v1/images/stellar/prod/220412130930-mcgirt-v-oklahoma-2021.jpg?c=16x9&q=w_800,c_fill",
+            "publishedAt": "2022-04-21T14:31:27Z",
+            "content": "A version of this story appeared in CNNs Race Deconstructed newsletter. To get it in your inbox every week, sign up for free here.\r\nNative American leaders are again at odds with Oklahoma Republican \u2026 [+6769 chars]"
+        },
+        {
+            "source": {
+                "id": "cnn",
+                "name": "CNN"
+            },
+            "author": "Amanda Davies, CNN",
+            "title": "Serena Williams and Lewis Hamilton join consortium to buy Chelsea",
+            "description": "Twenty-three-time grand slam champion Serena Williams and seven-time Formula One world champion Lewis Hamilton have joined Martin Broughton's bid to buy Premier League club Chelsea, a source close to the bid told CNN Sport on Thursday.",
+            "url": "https://www.cnn.com/2022/04/21/football/serena-williams-lewis-hamilton-chelsea-intl-spt/index.html",
+            "urlToImage": "https://cdn.cnn.com/cnnnext/dam/assets/220421100043-01-serena-williams-lewis-hamilton-intl-spt-super-tease.jpg",
+            "publishedAt": "2022-04-21T14:18:50Z",
+            "content": "(CNN)Twenty-three-time grand slam champion Serena Williams and seven-time Formula One world champion Lewis Hamilton have joined Martin Broughton's bid to buy Premier League club Chelsea, a source clo\u2026 [+1757 chars]"
+        },
+        {
+            "source": {
+                "id": "cnn",
+                "name": "CNN"
+            },
+            "author": "Marianne Garvey",
+            "title": "Johnny Depp cross-examined in defamation case against Amber Heard",
+            "description": "Johnny Depp is testifying for a third day in a Fairfax, Virginia court in his defamation case against his ex-wife Amber Heard.",
+            "url": "https://www.cnn.com/2022/04/21/entertainment/johnny-depp-testimony-amber-heard-trial/index.html",
+            "urlToImage": "https://cdn.cnn.com/cnnnext/dam/assets/220421100245-01-depp-heard-defamation-trial-0421-super-tease.jpg",
+            "publishedAt": "2022-04-21T14:08:51Z",
+            "content": "(CNN)Johnny Depp is testifying for a third day in a Fairfax, Virginia court in his defamation case against his ex-wife Amber Heard. \r\nDepp is suing Heard for $50 million over a 2018 Washington Post o\u2026 [+740 chars]"
+        }
+    ]
+}

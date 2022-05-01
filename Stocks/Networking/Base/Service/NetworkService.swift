@@ -26,6 +26,10 @@ class NetworkService<API: NetworkAPI> {
                 let data = try JSONDecoder.decoder.decode(T.self, from: result.data)
                 return Response(data: data, response: result.response)
             }
+            .mapError({ error in
+                print(error)
+                return error
+            })
             .eraseToAnyPublisher()
     }
     

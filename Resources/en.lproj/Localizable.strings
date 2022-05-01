@@ -15,6 +15,7 @@
 // Errors
 
 "unexpectedData" = "Unexpected data";
+"internetConnectionError" = "Check internet connection";
 "unknownError" = "Unknown error";
 "serverError" = "Server request error";
 "badResponse" = "Bad response";

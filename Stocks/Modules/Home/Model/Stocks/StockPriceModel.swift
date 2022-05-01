@@ -11,6 +11,11 @@ struct StockPriceModel: Hashable {
     let stock: String
     let price: Decimal
     
+    init(stock: String, price: Decimal) {
+        self.stock = stock
+        self.price = price
+    }
+    
     init?(from dict: [String:String]) {
         guard
             let stock = dict["STOCK"],

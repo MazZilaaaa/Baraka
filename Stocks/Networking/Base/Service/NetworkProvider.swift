@@ -19,6 +19,9 @@ extension NetworkProvider: NetworkProviderProtocol {
     func fetch(from request: URLRequest) -> AnyPublisher<Response<Data>, Error> {
         return URLSession.shared
             .dataTaskPublisher(for: request)
+            .mapError { error in
+                return NetworkError.unknownError
+            }
             .tryMap { result -> Response<Data> in
                 guard let httpResponse = result.response as? HTTPURLResponse else {
                     throw NetworkError.badResponse(response: result.response)
