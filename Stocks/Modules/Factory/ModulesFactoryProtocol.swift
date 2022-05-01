@@ -6,5 +6,5 @@
 //
 
 protocol ModulesFactoryProtocol {
-    func createHome(output: HomeOutput?) -> HomeModule
+    func createHomeModule() -> HomeModule
 }

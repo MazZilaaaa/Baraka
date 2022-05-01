@@ -14,7 +14,7 @@ final class ModulesFactory {
 }
 
 extension ModulesFactory: ModulesFactoryProtocol {
-    func createHome(output: HomeOutput?) -> HomeModule {
-        HomeConfigurator().configure(dependencies: dependencies, output: output)
+    func createHomeModule() -> HomeModule {
+        HomeConfigurator().configure(dependencies: dependencies)
     }
 }

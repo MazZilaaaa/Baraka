@@ -11,8 +11,7 @@ typealias HomeModule = (viewModel: HomeViewModel, viewController: UIViewControll
 
 final class HomeConfigurator {
     func configure(
-        dependencies: DependencyFactoryProtocol,
-        output: HomeOutput? = nil
+        dependencies: DependencyFactoryProtocol
     ) -> HomeModule {
         let vm = HomeViewModel(
             newsService: dependencies.newsService,
@@ -21,8 +20,6 @@ final class HomeConfigurator {
         )
         
         let vc = HomeViewController(viewModel: vm)
-        
-        vm.output = output
         
         return (vm, vc)
     }

@@ -25,7 +25,7 @@ final class AppCoordinator {
     }
     
     private func showHomeScreen() {
-        let homeScreen = modulesFactory.createHome(output: self)
+        let homeScreen = modulesFactory.createHomeModule()
         navigationController.setViewControllers([homeScreen.viewController], animated: false)
     }
 }
@@ -36,9 +36,4 @@ extension AppCoordinator: Coordinator {
     func start() {
         showHomeScreen()
     }
-}
-
-// MARK: - HomeOutput
-
-extension AppCoordinator: HomeOutput {
 }

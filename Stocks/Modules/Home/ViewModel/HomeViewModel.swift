@@ -16,10 +16,6 @@ final class HomeViewModel: ObservableObject {
     private let stocksService: StocksServiceProtocol
     private let sectionsBuilder: HomeSectionBuilderProtocol
     
-    // MARK: - Output
-    
-    weak var output: HomeOutput?
-    
     // MARK: - Environment
     
     @Published var sections: HomeSectionsModel = HomeSectionsModel()
